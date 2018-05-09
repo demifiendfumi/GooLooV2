@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">GooLoo</string>
+    <string name="Sign_up"><u>Sign up</u></string>
+    <string name="Forget_password"><u>Forget Password</u></string>
 </resources>
