@@ -98,6 +98,7 @@ public class MainActivity extends AppCompatActivity {
                 if(user[1].equals(email) && user[2].equals(password)){
                     Intent j = new Intent(MainActivity.this, HomeActivity.class);
                     j.putExtra("user", user);
+
                     startActivity(j);
                 }else{
                     Toast toast = Toast.makeText(MainActivity.this, "email/password is incorrect", Toast.LENGTH_LONG);
