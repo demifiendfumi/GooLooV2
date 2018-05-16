@@ -46,7 +46,8 @@ public class SignUpPageMainActivity extends AppCompatActivity {
         tvSignupFB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent j = new Intent(SignUpPageMainActivity.this, SignUpFaceBookActivity.class);
+                startActivity(j);
             }
         });
 

@@ -40,19 +40,18 @@ public class HomeActivity extends AppCompatActivity {
         tvFirstName.setText(firstName);
         tvLastName.setText(lastName);
 
-        final int postal_code = Integer.parseInt(etPostalCode.getText().toString());
-        final String check_postal = etPostalCode.getText().toString();
-
 
         btnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if(postal_code == (int)postal_code && check_postal.length() == 6){
+                final String check_postal = etPostalCode.getText().toString();
+                final int postal_code = Integer.parseInt(check_postal);
 
+                if (check_postal.length() == 6 ){
                     Intent j = new Intent(HomeActivity.this, RestaurantActivity.class);
-                    j.putExtra("user", user);
-                    j.putExtra("postal_code", postal_code);
+                    j.putExtra("postal", postal_code );
+                    j.putExtra("user",user);
 
                     startActivity(j);
 
@@ -60,7 +59,6 @@ public class HomeActivity extends AppCompatActivity {
                     Toast toast = Toast.makeText(HomeActivity.this, "invalid postal code", Toast.LENGTH_LONG);
                     toast.show();
                 }
-
 
             }
         });
