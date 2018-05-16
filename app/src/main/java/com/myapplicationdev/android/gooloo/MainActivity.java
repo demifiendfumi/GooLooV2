@@ -92,13 +92,6 @@ public class MainActivity extends AppCompatActivity {
                 queue.add(stringRequest);
                 String [] user = {id,objEmail, objPass, lastName, firstName};
                 //test array
-                Log.d("item", id);
-                Log.d("item", objEmail);
-                Log.d("item", objPass);
-                Log.d("item", lastName);
-                Log.d("item", firstName);
-
-
                 for(int x =0; x < user.length; x++){
                     Log.d("item", user[x]);
                 }
@@ -106,6 +99,9 @@ public class MainActivity extends AppCompatActivity {
                     Intent j = new Intent(MainActivity.this, HomeActivity.class);
                     j.putExtra("user", user);
                     startActivity(j);
+                }else{
+                    Toast toast = Toast.makeText(MainActivity.this, "email/password is incorrect", Toast.LENGTH_LONG);
+                    toast.show();
                 }
             }
         });
