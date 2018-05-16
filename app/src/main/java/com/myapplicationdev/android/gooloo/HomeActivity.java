@@ -55,6 +55,7 @@ public class HomeActivity extends AppCompatActivity {
                     j.putExtra("postal_code", postal_code);
 
                     startActivity(j);
+
                 }else{
                     Toast toast = Toast.makeText(HomeActivity.this, "invalid postal code", Toast.LENGTH_LONG);
                     toast.show();
