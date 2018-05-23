@@ -106,5 +106,13 @@ public class MainActivity extends AppCompatActivity {
                 queue.add(stringRequest);
             }
         });
+
+        tvSignUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainActivity.this,SignUpPageMainActivity.class);
+                startActivity(i);
+            }
+        });
     }
 }
