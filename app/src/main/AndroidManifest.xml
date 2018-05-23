@@ -18,8 +18,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SignUpPageMainActivity" />
         <activity android:name=".HomeActivity" />
+        <activity android:name=".SignUpPageMainActivity" />
+        <activity android:name=".RestaurantActivity"></activity>
     </application>
 
 </manifest>

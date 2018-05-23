@@ -3,6 +3,7 @@ package com.myapplicationdev.android.gooloo;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,6 +17,8 @@ public class HomeActivity extends AppCompatActivity {
     ImageView ivProfile;
     EditText etPostalCode;
     Button btnSearch;
+    int postal_code;
+    String postal;
 
 
     @Override
@@ -40,26 +43,25 @@ public class HomeActivity extends AppCompatActivity {
         tvFirstName.setText(firstName);
         tvLastName.setText(lastName);
 
-
         btnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                postal = etPostalCode.getText().toString();
+                Log.d("postal", postal);
+                try {
+                    postal_code = Integer.parseInt(postal);
+                    Log.d("postal", postal_code+"");
+                    if (postal_code == (int) postal_code && postal.length() == 6) {
 
-                final String check_postal = etPostalCode.getText().toString();
-                final int postal_code = Integer.parseInt(check_postal);
-
-                if (check_postal.length() == 6 ){
-                    Intent j = new Intent(HomeActivity.this, RestaurantActivity.class);
-                    j.putExtra("postal", postal_code );
-                    j.putExtra("user",user);
-
-                    startActivity(j);
-
-                }else{
-                    Toast toast = Toast.makeText(HomeActivity.this, "invalid postal code", Toast.LENGTH_LONG);
+                        Intent j = new Intent(HomeActivity.this, RestaurantActivity.class);
+                        j.putExtra("user", user);
+                        j.putExtra("postal_code", postal);
+                        startActivity(j);
+                    }
+                }catch (NumberFormatException e){
+                    Toast toast = Toast.makeText(HomeActivity.this, "Sorry, but there are no restaurants found for this postcode.", Toast.LENGTH_LONG);
                     toast.show();
                 }
-
             }
         });
 
