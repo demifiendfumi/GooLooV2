@@ -74,6 +74,20 @@ public class MainActivity extends AppCompatActivity {
                                     Log.d("item", response.getString("last_name"));
                                     firstName = response.getString("first_name");
                                     Log.d("item", response.getString("first_name"));
+                                    String [] user = {id,objEmail, objPass, lastName, firstName};
+                                    //test array
+                                    for(int x =0; x < user.length; x++){
+                                        Log.d("item", user[x]);
+                                    }
+                                    if(objEmail.equals(email) && objPass.equals(password)){
+                                        Intent j = new Intent(MainActivity.this, HomeActivity.class);
+                                        j.putExtra("user", user);
+                                        Log.d("user", user.length+"");
+                                        startActivity(j);
+                                    }else{
+                                        Toast toast = Toast.makeText(MainActivity.this, "email/password is incorrect", Toast.LENGTH_LONG);
+                                        toast.show();
+                                    }
 
                                 } catch (JSONException e) {
                                     e.printStackTrace();
@@ -90,20 +104,6 @@ public class MainActivity extends AppCompatActivity {
 
 // Add the request to the RequestQueue.
                 queue.add(stringRequest);
-                String [] user = {id,objEmail, objPass, lastName, firstName};
-                //test array
-                for(int x =0; x < user.length; x++){
-                    Log.d("item", user[x]);
-                }
-                if(user[1].equals(email) && user[2].equals(password)){
-                    Intent j = new Intent(MainActivity.this, HomeActivity.class);
-                    j.putExtra("user", user);
-
-                    startActivity(j);
-                }else{
-                    Toast toast = Toast.makeText(MainActivity.this, "email/password is incorrect", Toast.LENGTH_LONG);
-                    toast.show();
-                }
             }
         });
     }

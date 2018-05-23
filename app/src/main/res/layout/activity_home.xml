@@ -57,7 +57,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:gravity="center"
-        android:inputType="textPostalAddress" />
+        android:inputType="number" />
 
     <android.support.v4.widget.Space
         android:layout_width="1dp"
