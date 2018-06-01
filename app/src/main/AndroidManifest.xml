@@ -21,7 +21,8 @@
         <activity android:name=".HomeActivity" />
         <activity android:name=".SignUpPageMainActivity" />
         <activity android:name=".RestaurantActivity" />
-        <activity android:name=".SendVerifyActivity"></activity>
+        <activity android:name=".SendVerifyActivity" />
+        <activity android:name=".DishesActivity"></activity>
     </application>
 
 </manifest>
