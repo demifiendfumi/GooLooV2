@@ -23,6 +23,7 @@
         <activity android:name=".RestaurantActivity" />
         <activity android:name=".SendVerifyActivity" />
         <activity android:name=".DishesActivity"></activity>
+        <activity android:name=".ManageTeamActivity"></activity>
     </application>
 
 </manifest>
