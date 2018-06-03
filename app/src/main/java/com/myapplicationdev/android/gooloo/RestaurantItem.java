@@ -2,11 +2,13 @@ package com.myapplicationdev.android.gooloo;
 
 public class RestaurantItem {
 
+    private int id;
     private String imageName;
     private String resName;
     private double resRating;
 
-    public RestaurantItem(String imageName, String resName, double resRating) {
+    public RestaurantItem(int id, String imageName, String resName, double resRating) {
+        this.id = id;
         this.imageName = imageName;
         this.resName = resName;
         this.resRating = resRating;
@@ -20,6 +22,8 @@ public class RestaurantItem {
                 ", resRating=" + resRating +
                 '}';
     }
+
+    public int getId() { return id; }
 
     public String getImageName() {
         return imageName;

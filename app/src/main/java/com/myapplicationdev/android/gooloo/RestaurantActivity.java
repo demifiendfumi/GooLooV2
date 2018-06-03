@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -59,6 +60,8 @@ public class RestaurantActivity extends AppCompatActivity {
         Log.d("run load","running");
         loadRecyclerViewData();
         Log.d("run loaded","ran");
+
+
     }
 
     private void loadRecyclerViewData(){
@@ -85,8 +88,9 @@ public class RestaurantActivity extends AppCompatActivity {
                             for (int i = 0; i < jsonArray.length(); i++) {
                                 jsonObject = jsonArray.getJSONObject(i);
                                 RestaurantItem item = new RestaurantItem(
-                                        jsonObject.getString("name"),
+                                        jsonObject.getInt("id"),
                                         jsonObject.getString("logo"),
+                                        jsonObject.getString("name"),
                                         jsonObject.getDouble("rating")
                                 );
                                 listItems.add(item);

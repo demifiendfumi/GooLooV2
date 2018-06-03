@@ -9,9 +9,12 @@
 
     <TextView
         android:id="@+id/textViewResult"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Result" />
+        android:gravity="center"
+        android:text="Result"
+        android:textColor="@android:color/black"
+        android:textSize="24sp" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvLV"
