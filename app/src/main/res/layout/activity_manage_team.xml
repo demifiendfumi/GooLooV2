@@ -24,8 +24,7 @@
             android:id="@+id/btnAddPeople"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@mipmap/baseline_person_add_black_18dp" />
+            android:layout_weight="1" />
     </LinearLayout>
 
     <android.support.v4.widget.Space
