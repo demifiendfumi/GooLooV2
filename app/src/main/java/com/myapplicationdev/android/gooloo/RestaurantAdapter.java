@@ -67,8 +67,9 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
         }else if (listOneRes.getResName().equals("Gooloo Selected @ Jurong West")){
             holder.ivLogo.setImageResource(R.drawable.gooloo_selected);
         }else{
-            holder.ivLogo.setImageResource(R.drawable.logo);
+            //holder.ivLogo.setImageResource(R.drawable.logo);
         }
+        /*
         holder.linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -80,6 +81,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
                 context.startActivity(i);
             }
         });
+        */
 //        String imageName = listOneRes.getImageName();
 //        Context context = holder.ivLogo.getContext();
 //        int id = context.getResources().getIdentifier(imageName, "drawable", context.getPackageName());
