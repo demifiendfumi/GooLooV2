@@ -36,6 +36,7 @@ public class DishesActivity extends AppCompatActivity {
     TextView tvResult;
     int m_id = 0;
     String [] data;
+    String postal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +51,7 @@ public class DishesActivity extends AppCompatActivity {
         Intent intent = getIntent();
         data = intent.getStringArrayExtra("userData");
         m_id = intent.getIntExtra("id", 0);
+        postal = intent.getStringExtra("postal");
         tvResult.setText(intent.getStringExtra("res_name"));
 
         listDishes = new ArrayList<>();
@@ -92,7 +94,7 @@ public class DishesActivity extends AppCompatActivity {
                                 listDishes.add(dish);
                             }
                             //tvResult.setText(postal);
-                            ra = new DishesAdapter(listDishes, getApplicationContext(), data);
+                            ra = new DishesAdapter(listDishes, getApplicationContext(), data, m_id, postal);
                             recyclerView.setAdapter(ra);
 
                         } catch (JSONException e) {

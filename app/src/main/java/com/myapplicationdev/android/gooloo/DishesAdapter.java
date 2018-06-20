@@ -42,11 +42,16 @@ public class DishesAdapter extends RecyclerView.Adapter<DishesAdapter.ViewHolder
     private List<DishesItem> listDish;
     private Context context;
     private String [] user;
+    private int mid;
+    private String postCode;
+    private int dishID;
 
-    public DishesAdapter(List<DishesItem> listDish, Context context, String[]userData) {
+    public DishesAdapter(List<DishesItem> listDish, Context context, String[]userData, int mID, String pCode) {
         this.listDish = listDish;
         this.context = context;
         user = userData;
+        mid = mID;
+        postCode = pCode;
     }
 
     @Override
@@ -59,6 +64,7 @@ public class DishesAdapter extends RecyclerView.Adapter<DishesAdapter.ViewHolder
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
         final DishesItem listOneDish = listDish.get(position);
+        dishID = listOneDish.getDishId();
         holder.tvName.setText(listOneDish.getDishName());
         holder.tvCNName.setText(String.valueOf(listOneDish.getDishCNName()));
         holder.tvPrice.setText("$" + listOneDish.getPrice());
@@ -206,7 +212,7 @@ public class DishesAdapter extends RecyclerView.Adapter<DishesAdapter.ViewHolder
                                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                                 String formattedDate = df.format(c);
                                 final String booking_time = sdf.format(c);
-                                int number = count[0]; //item order
+                                final int number = count[0]; //item order
                                 String price = tvPrice.getText().toString();
                                 final double amount = Double.parseDouble(String.format("%.2f", Double.parseDouble(price.substring(1)) * number));
                                 final String delivery_date = "Today";
@@ -214,7 +220,7 @@ public class DishesAdapter extends RecyclerView.Adapter<DishesAdapter.ViewHolder
                                 final int user_id = Integer.parseInt(user[0]);
                                 final StringBuilder sb = new StringBuilder();
 
-                                RequestQueue queueOF = Volley.newRequestQueue(contextI);
+                                RequestQueue queueOF = Volley.newRequestQueue(contextI); //get from
                                 final String of = "order_ref=GL" + formattedDate;
                                 String of_url ="http://10.0.2.2/gooloo/getOrderRef.php?" + of;
                                 Log.d("of_url", of_url);
@@ -230,15 +236,83 @@ public class DishesAdapter extends RecyclerView.Adapter<DishesAdapter.ViewHolder
                                                 sb.append("&amount=" + amount);
                                                 sb.append("&booking_time=" + booking_time);
 
-                                                RequestQueue queue = Volley.newRequestQueue(contextI);
+                                                RequestQueue queue = Volley.newRequestQueue(contextI); //add to orders table
                                                 String url ="http://10.0.2.2/gooloo/add-cart.php?" + sb.toString();
                                                 Log.d("url", url);
                                                 StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                                                         new Response.Listener<String>() {
                                                             @Override
                                                             public void onResponse(String response) {
-                                                                Log.d("check String", "" + response.toString());
-                                                                Toast.makeText(context, response.toString(), Toast.LENGTH_LONG).show();
+
+                                                                RequestQueue queueSC = Volley.newRequestQueue(contextI); //add to shopping_cart table
+                                                                String url ="http://10.0.2.2/gooloo/addShoppingCart.php?customer_id="+ user_id +"&country_id=0&state_id=0&city_id=0&city_name=Singapore&delivery_date="+ delivery_date +"&delivery_time="+ delivery_time +"&m_id="+ mid +"&search_postcode="+ postCode +"&create_time="+ booking_time +"&update_time="+ booking_time;
+                                                                Log.d("url", url);
+                                                                StringRequest stringRequestSC = new StringRequest(Request.Method.GET, url,
+                                                                        new Response.Listener<String>() {
+                                                                            @Override
+                                                                            public void onResponse(String response) {
+
+                                                                                RequestQueue queueGSC = Volley.newRequestQueue(contextI); //get shopping_cart_id
+                                                                                String url ="http://10.0.2.2/gooloo/getShoppingCart.php?customer_id="+ user_id;
+                                                                                Log.d("url", url);
+                                                                                StringRequest stringRequestGSC = new StringRequest(Request.Method.GET, url,
+                                                                                        new Response.Listener<String>() {
+                                                                                            @Override
+                                                                                            public void onResponse(String response) {
+                                                                                                try {
+                                                                                                    JSONObject jsonObject = new JSONObject();
+                                                                                                    JSONArray jsonArray = new JSONArray(response);
+                                                                                                    jsonObject =  jsonArray.getJSONObject(0);
+                                                                                                    String shpCartId = jsonObject.getString("id");
+                                                                                                    Log.d("shoppingCart_id", shpCartId);
+
+                                                                                                    RequestQueue queueSCD = Volley.newRequestQueue(contextI); //add to shopping_cart_details table
+                                                                                                    String url ="http://10.0.2.2/gooloo/addShoppingCartDetails.php?shopping_cart_id="+ shpCartId +"&items_id="+ dishID +"&amount="+ number +"&create_time="+ booking_time +"&update_time="+ booking_time;
+                                                                                                    Log.d("url", url);
+                                                                                                    StringRequest stringRequestSCD = new StringRequest(Request.Method.GET, url,
+                                                                                                            new Response.Listener<String>() {
+                                                                                                                @Override
+                                                                                                                public void onResponse(String response) {
+                                                                                                                    Toast.makeText(context, response.toString(), Toast.LENGTH_LONG).show();
+                                                                                                                }
+                                                                                                            }, new Response.ErrorListener() {
+                                                                                                        @Override
+                                                                                                        public void onErrorResponse(VolleyError error) {
+                                                                                                            Log.d("item", error.toString()+"");
+                                                                                                            Toast toast = Toast.makeText(context, error.toString(), Toast.LENGTH_LONG);
+                                                                                                            toast.show();
+                                                                                                        }
+                                                                                                    });
+
+                                                                                                    queueSCD.add(stringRequestSCD);
+
+                                                                                                } catch (JSONException e) {
+                                                                                                    e.printStackTrace();
+                                                                                                }
+                                                                                            }
+                                                                                        }, new Response.ErrorListener() {
+                                                                                    @Override
+                                                                                    public void onErrorResponse(VolleyError error) {
+                                                                                        Log.d("item", error.toString()+"");
+                                                                                        Toast toast = Toast.makeText(context, error.toString(), Toast.LENGTH_LONG);
+                                                                                        toast.show();
+                                                                                    }
+                                                                                });
+
+                                                                                queueGSC.add(stringRequestGSC);
+
+                                                                            }
+                                                                        }, new Response.ErrorListener() {
+                                                                    @Override
+                                                                    public void onErrorResponse(VolleyError error) {
+                                                                        Log.d("item", error.toString()+"");
+                                                                        Toast toast = Toast.makeText(context, error.toString(), Toast.LENGTH_LONG);
+                                                                        toast.show();
+                                                                    }
+                                                                });
+
+                                                                queueSC.add(stringRequestSC);
+
                                                             }
                                                         }, new Response.ErrorListener() {
                                                     @Override
@@ -257,9 +331,9 @@ public class DishesAdapter extends RecyclerView.Adapter<DishesAdapter.ViewHolder
                                         Log.d("item", error.toString()+"");
                                         Toast toast = Toast.makeText(context, error.toString(), Toast.LENGTH_LONG);
                                         toast.show();
+
                                     }
                                 });
-
                                 queueOF.add(strRequest);
 //                                SELECT SUBSTRING(order_ref, 11, 6)
 //                                FROM `orders` WHERE SUBSTRING(order_ref, 1, 10) = "GL20160311"

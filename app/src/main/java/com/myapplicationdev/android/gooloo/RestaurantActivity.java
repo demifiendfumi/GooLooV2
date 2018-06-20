@@ -99,7 +99,7 @@ public class RestaurantActivity extends AppCompatActivity {
                             Log.d("arraylist", listItems.size() + "");
                             Log.d("arraylist 1", listItems.get(0).toString());
                             Log.d("listItems", listItems.size()+"");
-                            ra = new RestaurantAdapter(listItems, getApplicationContext(), data);
+                            ra = new RestaurantAdapter(listItems, getApplicationContext(), data, postal);
                             recyclerView.setAdapter(ra);
 
                         } catch (JSONException e) {

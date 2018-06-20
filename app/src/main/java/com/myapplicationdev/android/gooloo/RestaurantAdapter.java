@@ -28,11 +28,13 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
     private Context context;
     private AdapterView.OnItemClickListener listener;
     private String [] user;
+    private String pCode;
 
-    public RestaurantAdapter(List<RestaurantItem> listRes, Context context, String[]userData) {
+    public RestaurantAdapter(List<RestaurantItem> listRes, Context context, String[]userData, String postCode) {
         this.listRes = listRes;
         this.context = context;
         user = userData;
+        pCode = postCode;
     }
 
     public void setClickListener(AdapterView.OnItemClickListener listener){
@@ -83,8 +85,10 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
                 i.putExtra("id", listOneRes.getId());
                 i.putExtra("res_name", listOneRes.getResName());
                 i.putExtra("userData", user);
+                i.putExtra("postal", pCode);
                 Log.d("user_data", Arrays.toString(user));
                 Log.d("Res id", String.valueOf(listOneRes.getId()));
+                Log.d("postal", pCode);
                 context.startActivity(i);
             }
         });
