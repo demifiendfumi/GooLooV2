@@ -207,7 +207,7 @@ public class DishesAdapter extends RecyclerView.Adapter<DishesAdapter.ViewHolder
                                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd%20HH:mm:ss");
                                 String formattedDate = df.format(c);
                                 String booking_time = sdf.format(c);
-                                int number = count[0];
+                                int number = count[0]; //item order
                                 String price = tvPrice.getText().toString();
                                 double amount = Double.parseDouble(price.substring(1)) * number;
                                 String delivery_date = "Today";
