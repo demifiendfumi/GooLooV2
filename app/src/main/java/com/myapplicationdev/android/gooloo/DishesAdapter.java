@@ -162,7 +162,6 @@ public class DishesAdapter extends RecyclerView.Adapter<DishesAdapter.ViewHolder
                             (LayoutInflater)contextI.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                     View viewDialog = inflater.inflate(R.layout.input, null);
                     final int[] count = {0};
-                    String order_ref = "GL";
                     Log.d("count", String.valueOf(count[0]));
                     TextView tvDN =(TextView) viewDialog.findViewById(R.id.tvDishName);
                     final TextView tvCount =(TextView) viewDialog.findViewById(R.id.textViewCount);
@@ -204,29 +203,53 @@ public class DishesAdapter extends RecyclerView.Adapter<DishesAdapter.ViewHolder
                                 System.out.println("Current time => " + c);
 
                                 SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd");
-                                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd%20HH:mm:ss");
+                                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                                 String formattedDate = df.format(c);
-                                String booking_time = sdf.format(c);
+                                final String booking_time = sdf.format(c);
                                 int number = count[0]; //item order
                                 String price = tvPrice.getText().toString();
-                                double amount = Double.parseDouble(price.substring(1)) * number;
-                                String delivery_date = "Today";
-                                String delivery_time = "12:00-12:30";
-                                int user_id = Integer.parseInt(user[0]);
-                                String order_ref = "GL"+formattedDate+"000001";
-//                                Log.d("date", order_ref);
-//                                Log.d("time", booking_time);
-//                                Log.d("amount", String.valueOf(amount));
-                                RequestQueue queue = Volley.newRequestQueue(contextI);
-                                String keys = "order_ref=" + order_ref + "&customer_id=" + user_id + "&delivery_date=" + delivery_date + "&delivery_time=" + delivery_time + "&amount=" + amount + "&booking_time=" + booking_time;
-                                String url ="http://10.0.2.2/gooloo/add-cart.php?" + keys;
-                                Log.d("url", url);
-                                StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                                final double amount = Double.parseDouble(String.format("%.2f", Double.parseDouble(price.substring(1)) * number));
+                                final String delivery_date = "Today";
+                                final String delivery_time = "12:00-12:30";
+                                final int user_id = Integer.parseInt(user[0]);
+                                final StringBuilder sb = new StringBuilder();
+
+                                RequestQueue queueOF = Volley.newRequestQueue(contextI);
+                                final String of = "order_ref=GL" + formattedDate;
+                                String of_url ="http://10.0.2.2/gooloo/getOrderRef.php?" + of;
+                                Log.d("of_url", of_url);
+                                StringRequest strRequest = new StringRequest(Request.Method.GET, of_url,
                                         new Response.Listener<String>() {
                                             @Override
-                                            public void onResponse(String response) {
-                                                Log.d("check String", "" + response.toString());
-                                                Toast.makeText(context, response.toString(), Toast.LENGTH_LONG).show();
+                                            public void onResponse(String rpn) {
+                                                sb.append(of);
+                                                sb.append(rpn);
+                                                sb.append("&customer_id=" + user_id);
+                                                sb.append("&delivery_date=" + delivery_date);
+                                                sb.append("&delivery_time=" + delivery_time);
+                                                sb.append("&amount=" + amount);
+                                                sb.append("&booking_time=" + booking_time);
+
+                                                RequestQueue queue = Volley.newRequestQueue(contextI);
+                                                String url ="http://10.0.2.2/gooloo/add-cart.php?" + sb.toString();
+                                                Log.d("url", url);
+                                                StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                                                        new Response.Listener<String>() {
+                                                            @Override
+                                                            public void onResponse(String response) {
+                                                                Log.d("check String", "" + response.toString());
+                                                                Toast.makeText(context, response.toString(), Toast.LENGTH_LONG).show();
+                                                            }
+                                                        }, new Response.ErrorListener() {
+                                                    @Override
+                                                    public void onErrorResponse(VolleyError error) {
+                                                        Log.d("item", error.toString()+"");
+                                                        Toast toast = Toast.makeText(context, error.toString(), Toast.LENGTH_LONG);
+                                                        toast.show();
+                                                    }
+                                                });
+
+                                                queue.add(stringRequest);
                                             }
                                         }, new Response.ErrorListener() {
                                     @Override
@@ -237,7 +260,7 @@ public class DishesAdapter extends RecyclerView.Adapter<DishesAdapter.ViewHolder
                                     }
                                 });
 
-                                queue.add(stringRequest);
+                                queueOF.add(strRequest);
 //                                SELECT SUBSTRING(order_ref, 11, 6)
 //                                FROM `orders` WHERE SUBSTRING(order_ref, 1, 10) = "GL20160311"
                             }
