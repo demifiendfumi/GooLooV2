@@ -2,6 +2,11 @@
     <string name="app_name">GooLoo</string>
     <string name="Sign_up"><u>Sign up</u></string>
     <string name="Forget_password"><u>Forget Password</u></string>
+
+    <string name="facebook_app_id">1030815027094740</string>
+    <string name="fb_login_protocol_scheme">fb1030815027094740</string>
+
+
     <string name="open">Open</string>
     <string name="close">CLose</string>
 </resources>

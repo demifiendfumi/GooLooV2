@@ -51,6 +51,10 @@ public class SignUpPageMainActivity extends AppCompatActivity {
                 startActivity(j);
             }
         });
+       etFirstName.setText(getIntent().getStringExtra("first_name"));
+       etLastName.setText(getIntent().getStringExtra("last_name"));
+       etEmail.setText(getIntent().getStringExtra("email"));
+
 
         btnConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
