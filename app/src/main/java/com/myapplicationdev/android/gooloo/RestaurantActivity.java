@@ -37,6 +37,7 @@ public class RestaurantActivity extends AppCompatActivity {
     TextView tvResult;
     String postal;
     int id;
+    String [] data;
 //    String resName;
 //    String resLogo;
 //    double resRating;
@@ -52,10 +53,9 @@ public class RestaurantActivity extends AppCompatActivity {
         //get current context as parameter
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         Intent intent = getIntent();
-        String user[] = intent.getStringArrayExtra("user");
         postal = intent.getStringExtra("postal_code");
         Log.d("store Postal", postal);
-
+        data = intent.getStringArrayExtra("user");
         listItems = new ArrayList<>();
         Log.d("run load","running");
         loadRecyclerViewData();
@@ -99,7 +99,7 @@ public class RestaurantActivity extends AppCompatActivity {
                             Log.d("arraylist", listItems.size() + "");
                             Log.d("arraylist 1", listItems.get(0).toString());
                             Log.d("listItems", listItems.size()+"");
-                            ra = new RestaurantAdapter(listItems, getApplicationContext());
+                            ra = new RestaurantAdapter(listItems, getApplicationContext(), data);
                             recyclerView.setAdapter(ra);
 
                         } catch (JSONException e) {

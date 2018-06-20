@@ -1,5 +1,6 @@
 package com.myapplicationdev.android.gooloo;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -19,16 +20,19 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
+import java.util.Arrays;
 import java.util.List;
 
 public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.ViewHolder>{
     private List<RestaurantItem> listRes;
     private Context context;
     private AdapterView.OnItemClickListener listener;
+    private String [] user;
 
-    public RestaurantAdapter(List<RestaurantItem> listRes, Context context) {
+    public RestaurantAdapter(List<RestaurantItem> listRes, Context context, String[]userData) {
         this.listRes = listRes;
         this.context = context;
+        user = userData;
     }
 
     public void setClickListener(AdapterView.OnItemClickListener listener){
@@ -58,6 +62,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
 //        }
 //        holder.ivLogo.setImageBitmap(bm);
         //holder.tvImage.setText(listOneRes.getImageName());
+
         holder.tvName.setText(listOneRes.getResName());
         holder.tvRating.setText(String.valueOf(listOneRes.getResRating()));
         if(listOneRes.getResName().equals("Group Breakfast")){
@@ -69,6 +74,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
         }else{
             holder.ivLogo.setImageResource(R.drawable.logo);
         }
+
         holder.linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -76,6 +82,8 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
                 Intent i = new Intent(context, DishesActivity.class);
                 i.putExtra("id", listOneRes.getId());
                 i.putExtra("res_name", listOneRes.getResName());
+                i.putExtra("userData", user);
+                Log.d("user_data", Arrays.toString(user));
                 Log.d("Res id", String.valueOf(listOneRes.getId()));
                 context.startActivity(i);
             }
@@ -94,7 +102,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
-        public TextView tvName, tvRating, tvImage;
+        public TextView tvName, tvRating;
         public ImageView ivLogo;
         public LinearLayout linearLayout;
 
@@ -104,8 +112,6 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
             tvName = (TextView)itemView.findViewById(R.id. textViewName);
             tvRating = (TextView)itemView.findViewById(R.id. textViewRating);
             linearLayout = (LinearLayout)itemView.findViewById(R.id. linearLayout);
-            //tvImage = (TextView)itemView.findViewById(R.id. textViewImage);
-
         }
     }
 }
