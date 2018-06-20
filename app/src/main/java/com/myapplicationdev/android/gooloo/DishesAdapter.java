@@ -42,9 +42,9 @@ public class DishesAdapter extends RecyclerView.Adapter<DishesAdapter.ViewHolder
     private List<DishesItem> listDish;
     private Context context;
     private String [] user;
-    private int mid;
-    private String postCode;
-    private int dishID;
+    private int mid; // for addShoppingCart.php
+    private String postCode; //for addShoppingCart.php
+    private int dishID; //for addShoppingCartDetails.php
 
     public DishesAdapter(List<DishesItem> listDish, Context context, String[]userData, int mID, String pCode) {
         this.listDish = listDish;
