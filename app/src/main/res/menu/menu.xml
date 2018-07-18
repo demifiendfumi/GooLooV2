@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/homeSelection"
+        android:orderInCategory="100"
+        android:title="Home" />
+    <item
+        android:id="@+id/profileSelection"
+        android:orderInCategory="101"
+        android:title="Profile" />
+    <item
+        android:id="@+id/cartSelection"
+        android:orderInCategory="102"
+        android:title="View Cart" />
+    <item
+        android:id="@+id/orderSelection"
+        android:orderInCategory="103"
+        android:title="View Order"/>
+
+</menu>
