@@ -11,6 +11,8 @@ import android.support.v7.widget.LinearLayoutManager;
 //import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,7 +31,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DishesActivity extends AppCompatActivity {
+public class DishesActivity extends OptionMenu {
     private RecyclerView recyclerView;
     private RecyclerView.Adapter ra;
     private List<DishesItem> listDishes;
@@ -115,5 +117,43 @@ public class DishesActivity extends AppCompatActivity {
         queue.add(stringRequest);
 
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    //Step 2:
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here.
+        int id = item.getItemId();
+
+        if (id == R.id.homeSelection) {
+            Intent i = new Intent(this, HomeActivity.class);
+            i.putExtra("user", data);
+            startActivity(i);
+            return true;
+        }else if (id == R.id.profileSelection) {
+//            Intent i = new Intent(getBaseContext(), HomeActivity.class);
+//            startActivity(i);
+            Log.d("profile", "Profile Selected");
+            return true;
+        }else if (id == R.id.cartSelection) {
+            Intent i = new Intent(this, ViewCart.class);
+            i.putExtra("user", data);
+            startActivity(i);
+            return true;
+        }else if (id == R.id.orderSelection) {
+//            Intent i = new Intent(getBaseContext(), ViewCart.class);
+//            startActivity(i);
+            Log.d("view order", "Order selected");
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

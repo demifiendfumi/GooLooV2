@@ -253,16 +253,15 @@ public class DishesAdapter extends RecyclerView.Adapter<DishesAdapter.ViewHolder
                                                                             public void onResponse(String response) {
 
                                                                                 RequestQueue queueGSC = Volley.newRequestQueue(contextI); //get shopping_cart_id
-                                                                                String url ="http://10.0.2.2/gooloo/getShoppingCart.php?customer_id="+ user_id;
+                                                                                String url ="http://10.0.2.2/gooloo/getShoppingCart.php";
                                                                                 Log.d("url", url);
                                                                                 StringRequest stringRequestGSC = new StringRequest(Request.Method.GET, url,
                                                                                         new Response.Listener<String>() {
                                                                                             @Override
                                                                                             public void onResponse(String response) {
                                                                                                 try {
-                                                                                                    JSONObject jsonObject = new JSONObject();
                                                                                                     JSONArray jsonArray = new JSONArray(response);
-                                                                                                    jsonObject =  jsonArray.getJSONObject(0);
+                                                                                                    JSONObject jsonObject =  jsonArray.getJSONObject(0);
                                                                                                     String shpCartId = jsonObject.getString("id");
                                                                                                     Log.d("shoppingCart_id", shpCartId);
 
