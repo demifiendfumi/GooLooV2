@@ -143,8 +143,9 @@ public class RestaurantActivity extends OptionMenu {
             startActivity(i);
             return true;
         }else if (id == R.id.profileSelection) {
-//            Intent i = new Intent(getBaseContext(), HomeActivity.class);
-//            startActivity(i);
+            Intent i = new Intent(this, ViewProfile.class);
+            i.putExtra("user", data);
+            startActivity(i);
             Log.d("profile", "Profile Selected");
             return true;
         }else if (id == R.id.cartSelection) {
