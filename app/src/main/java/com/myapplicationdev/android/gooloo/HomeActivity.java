@@ -26,6 +26,7 @@ public class HomeActivity extends OptionMenu {
     int postal_code;
     String postal, firstName, lastName;
     String user[];
+    String user_detail[];
 
 //    private DrawerLayout mDrawerLayout;
 //    private ActionBarDrawerToggle mToggle;
@@ -56,6 +57,7 @@ public class HomeActivity extends OptionMenu {
         // Get intents
         Intent intent = getIntent();
         user = intent.getStringArrayExtra("user");
+        user_detail = intent.getStringArrayExtra("user_detail");
 
         //Extract data from user
         firstName = user[4];
@@ -107,6 +109,9 @@ public class HomeActivity extends OptionMenu {
         }else if (id == R.id.profileSelection) {
             Intent i = new Intent(this, ViewProfile.class);
             i.putExtra("user", user);
+            if(user_detail!= null && user_detail.length>0){
+                i.putExtra("user_detail", user_detail);
+            }
             startActivity(i);
             Log.d("profile", "Profile Selected");
             return true;

@@ -50,7 +50,8 @@
         <activity android:name=".ViewCart" />
         <activity android:name=".OptionMenu" />
         <activity android:name=".CheckOut" />
-        <activity android:name=".ViewProfile"></activity>
+        <activity android:name=".ViewProfile" />
+        <activity android:name=".EditProfile"></activity>
     </application>
 
 </manifest>
