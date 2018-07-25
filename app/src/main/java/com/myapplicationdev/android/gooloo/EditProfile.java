@@ -57,7 +57,7 @@ public class EditProfile extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 HttpRequest request = new HttpRequest
-                        ("http://10.0.2.2/gooloo/updateProfile.php");
+                        ("http://ivriah.000webhostapp.com/gooloo/gooloo/updateProfile.php");
                 request.setOnHttpResponseListener(mHttpResponseListener);
                 request.setMethod("POST");
                 request.addData("id", user[0]);

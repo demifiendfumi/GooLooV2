@@ -68,7 +68,7 @@ public class DishesActivity extends OptionMenu {
         progressDialog.show();
 
         RequestQueue queue = Volley.newRequestQueue(DishesActivity.this);
-        String url ="http://10.0.2.2/gooloo/get-dishes.php?m_id=" + m_id;
+        String url ="http://ivriah.000webhostapp.com/gooloo/gooloo/get-dishes.php?m_id=" + m_id;
         Log.d("url", url);
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {

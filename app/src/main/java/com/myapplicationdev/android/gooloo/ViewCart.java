@@ -54,8 +54,8 @@ public class ViewCart extends OptionMenu {
         lv.setAdapter(aa);
 
         HttpRequest request = new HttpRequest
-                ("http://10.0.2.2/gooloo/get-cart.php?c_id=" + c_id);
-        Log.d("url", "http://10.0.2.2/gooloo/get-cart.php?c_id=" + c_id);
+                ("http://ivriah.000webhostapp.com/gooloo/gooloo/get-cart.php?c_id=" + c_id);
+        Log.d("url", "http://ivriah.000webhostapp.com/gooloo/gooloo/get-cart.php?c_id=" + c_id);
         request.setOnHttpResponseListener(mHttpResponseListener);
         request.setMethod("GET");
         request.execute();
@@ -70,8 +70,8 @@ public class ViewCart extends OptionMenu {
                 String order_ref = "GL"+formattedDate;
 
                 HttpRequest requestCO = new HttpRequest
-                        ("http://10.0.2.2/gooloo/checkOrder.php?order_ref="+ order_ref +"&c_id=" + c_id);
-                Log.d("url", "http://10.0.2.2/gooloo/checkOrder.php?order_ref="+ order_ref +"&c_id=" + c_id);
+                        ("http://ivriah.000webhostapp.com/gooloo/gooloo/checkOrder.php?order_ref="+ order_ref +"&c_id=" + c_id);
+                Log.d("url", "http://ivriah.000webhostapp.com/gooloo/gooloo/checkOrder.php?order_ref="+ order_ref +"&c_id=" + c_id);
                 requestCO.setOnHttpResponseListener(mHttpResponseCheckOut);
                 requestCO.setMethod("GET");
                 requestCO.execute();

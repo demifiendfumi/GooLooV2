@@ -45,6 +45,8 @@ public class DishesAdapter extends RecyclerView.Adapter<DishesAdapter.ViewHolder
     private int mid; // for addShoppingCart.php
     private String postCode; //for addShoppingCart.php
     private int dishID; //for addShoppingCartDetails.php
+    private String orderRef;
+    private int order_id;
 
     public DishesAdapter(List<DishesItem> listDish, Context context, String[]userData, int mID, String pCode) {
         this.listDish = listDish;
@@ -213,7 +215,7 @@ public class DishesAdapter extends RecyclerView.Adapter<DishesAdapter.ViewHolder
                                 String formattedDate = df.format(c);
                                 final String booking_time = sdf.format(c);
                                 final int number = count[0]; //item order
-                                String price = tvPrice.getText().toString();
+                                final String price = tvPrice.getText().toString();
                                 final double amount = Double.parseDouble(String.format("%.2f", Double.parseDouble(price.substring(1)) * number));
                                 final String delivery_date = "Today";
                                 final String delivery_time = "12:00-12:30";
@@ -222,7 +224,7 @@ public class DishesAdapter extends RecyclerView.Adapter<DishesAdapter.ViewHolder
 
                                 RequestQueue queueOF = Volley.newRequestQueue(contextI); //get from
                                 final String of = "order_ref=GL" + formattedDate;
-                                String of_url ="http://10.0.2.2/gooloo/getOrderRef.php?" + of;
+                                String of_url ="http://ivriah.000webhostapp.com/gooloo/gooloo/getOrderRef.php?" + of;
                                 Log.d("of_url", of_url);
                                 StringRequest strRequest = new StringRequest(Request.Method.GET, of_url,
                                         new Response.Listener<String>() {
@@ -236,8 +238,9 @@ public class DishesAdapter extends RecyclerView.Adapter<DishesAdapter.ViewHolder
                                                 sb.append("&amount=" + amount);
                                                 sb.append("&booking_time=" + booking_time);
 
+                                                orderRef = "GL"+rpn;
                                                 RequestQueue queue = Volley.newRequestQueue(contextI); //add to orders table
-                                                String url ="http://10.0.2.2/gooloo/add-cart.php?" + sb.toString();
+                                                String url ="http://ivriah.000webhostapp.com/gooloo/gooloo/add-cart.php?" + sb.toString();
                                                 Log.d("url", url);
                                                 StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                                                         new Response.Listener<String>() {
@@ -245,7 +248,7 @@ public class DishesAdapter extends RecyclerView.Adapter<DishesAdapter.ViewHolder
                                                             public void onResponse(String response) {
 
                                                                 RequestQueue queueSC = Volley.newRequestQueue(contextI); //add to shopping_cart table
-                                                                String url ="http://10.0.2.2/gooloo/addShoppingCart.php?customer_id="+ user_id +"&country_id=0&state_id=0&city_id=0&city_name=Singapore&delivery_date="+ delivery_date +"&delivery_time="+ delivery_time +"&m_id="+ mid +"&search_postcode="+ postCode +"&create_time="+ booking_time +"&update_time="+ booking_time;
+                                                                String url ="http://ivriah.000webhostapp.com/gooloo/gooloo/addShoppingCart.php?customer_id="+ user_id +"&country_id=0&state_id=0&city_id=0&city_name=Singapore&delivery_date="+ delivery_date +"&delivery_time="+ delivery_time +"&m_id="+ mid +"&search_postcode="+ postCode +"&create_time="+ booking_time +"&update_time="+ booking_time;
                                                                 Log.d("url", url);
                                                                 StringRequest stringRequestSC = new StringRequest(Request.Method.GET, url,
                                                                         new Response.Listener<String>() {
@@ -253,7 +256,7 @@ public class DishesAdapter extends RecyclerView.Adapter<DishesAdapter.ViewHolder
                                                                             public void onResponse(String response) {
 
                                                                                 RequestQueue queueGSC = Volley.newRequestQueue(contextI); //get shopping_cart_id
-                                                                                String url ="http://10.0.2.2/gooloo/getShoppingCart.php";
+                                                                                String url ="http://ivriah.000webhostapp.com/gooloo/gooloo/getShoppingCart.php";
                                                                                 Log.d("url", url);
                                                                                 StringRequest stringRequestGSC = new StringRequest(Request.Method.GET, url,
                                                                                         new Response.Listener<String>() {
@@ -266,13 +269,46 @@ public class DishesAdapter extends RecyclerView.Adapter<DishesAdapter.ViewHolder
                                                                                                     Log.d("shoppingCart_id", shpCartId);
 
                                                                                                     RequestQueue queueSCD = Volley.newRequestQueue(contextI); //add to shopping_cart_details table
-                                                                                                    String url ="http://10.0.2.2/gooloo/addShoppingCartDetails.php?shopping_cart_id="+ shpCartId +"&items_id="+ dishID +"&amount="+ number +"&create_time="+ booking_time +"&update_time="+ booking_time;
+                                                                                                    String url ="http://ivriah.000webhostapp.com/gooloo/gooloo/addShoppingCartDetails.php?shopping_cart_id="+ shpCartId +"&items_id="+ dishID +"&amount="+ number +"&create_time="+ booking_time +"&update_time="+ booking_time;
                                                                                                     Log.d("url", url);
                                                                                                     StringRequest stringRequestSCD = new StringRequest(Request.Method.GET, url,
                                                                                                             new Response.Listener<String>() {
                                                                                                                 @Override
                                                                                                                 public void onResponse(String response) {
-                                                                                                                    Toast.makeText(context, response.toString(), Toast.LENGTH_LONG).show();
+                                                                                                                    RequestQueue queueGetOrderId = Volley.newRequestQueue(contextI);
+                                                                                                                    String url = "http://ivriah.000webhostapp.com/gooloo/gooloo/getOrderByOrderId.php?order_ref=" + orderRef;
+                                                                                                                    StringRequest stringRequestGOI = new StringRequest(Request.Method.GET, url,
+                                                                                                                            new Response.Listener<String>() {
+                                                                                                                                @Override
+                                                                                                                                public void onResponse(String response) {
+                                                                                                                                    RequestQueue queueAddOrderDetail = Volley.newRequestQueue(contextI);
+                                                                                                                                    String getMethod = "order_id=" + orderRef + "&item_id=" + dishID + "&m_id=" + mid + "&item_name=" + tvName.getText() + "&item_cn_name=" + tvCNName.getText() + "&amount=" + amount + "&count=" + count[0] + "&price=" + price + "&create_time=" + booking_time + "&update_time=" + booking_time + "&pick_count=" + count[0];
+                                                                                                                                    String url = "http://ivriah.000webhostapp.com/gooloo/gooloo/addOrderDetail.php?" + getMethod;
+                                                                                                                                    StringRequest stringRequestAOD = new StringRequest(Request.Method.GET, url,
+                                                                                                                                            new Response.Listener<String>() {
+                                                                                                                                                @Override
+                                                                                                                                                public void onResponse(String response) {
+                                                                                                                                                    Toast.makeText(context, response.toString(), Toast.LENGTH_SHORT).show();
+                                                                                                                                                }
+                                                                                                                                            }, new Response.ErrorListener() {
+                                                                                                                                        @Override
+                                                                                                                                        public void onErrorResponse(VolleyError error) {
+                                                                                                                                            Log.d("item", error.toString()+"");
+                                                                                                                                            Toast toast = Toast.makeText(context, error.toString(), Toast.LENGTH_LONG);
+                                                                                                                                            toast.show();
+                                                                                                                                        }
+                                                                                                                                    });
+                                                                                                                                    queueAddOrderDetail.add(stringRequestAOD);
+                                                                                                                                }
+                                                                                                                            }, new Response.ErrorListener() {
+                                                                                                                        @Override
+                                                                                                                        public void onErrorResponse(VolleyError error) {
+                                                                                                                            Log.d("item", error.toString()+"");
+                                                                                                                            Toast toast = Toast.makeText(context, error.toString(), Toast.LENGTH_LONG);
+                                                                                                                            toast.show();
+                                                                                                                        }
+                                                                                                                    });
+                                                                                                                    queueGetOrderId.add(stringRequestGOI);
                                                                                                                 }
                                                                                                             }, new Response.ErrorListener() {
                                                                                                         @Override

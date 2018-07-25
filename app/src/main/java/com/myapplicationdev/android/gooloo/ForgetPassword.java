@@ -42,7 +42,7 @@ public class ForgetPassword extends AppCompatActivity {
             public void onClick(View v) {
                 String email = etEmailForget.getText().toString();
                 RequestQueue queue = Volley.newRequestQueue(ForgetPassword.this);
-                String url ="http://homes.soi.rp.edu.sg/16023018/FYPGooLoo/doResetPassword.php?email=" + email;
+                String url ="http://ivriah.000webhostapp.com/gooloo/gooloo/doResetPassword.php?email=" + email;
 
                 // Request a json response from the provided URL.
                 StringRequest stringRequest = new StringRequest(Request.Method.GET, url,

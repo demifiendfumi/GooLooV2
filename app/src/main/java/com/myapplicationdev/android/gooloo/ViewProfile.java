@@ -52,7 +52,7 @@ public class ViewProfile extends AppCompatActivity {
             company.setText(user_detail[1]);
         }else{
             HttpRequest request = new HttpRequest
-                    ("http://10.0.2.2/gooloo/viewProfile.php?firstName="+ user[4] +"&lastName=" + user[3]);
+                    ("http://ivriah.000webhostapp.com/gooloo/gooloo/viewProfile.php?firstName="+ user[4] +"&lastName=" + user[3]);
             request.setOnHttpResponseListener(mHttpResponseListener);
             request.setMethod("GET");
             request.execute();

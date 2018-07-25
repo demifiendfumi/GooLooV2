@@ -28,7 +28,7 @@ public class SignUpFacebook extends AppCompatActivity {
         String lastName = getIntent().getExtras().getString("last_name");
         String email = getIntent().getExtras().getString("email");
 
-        String url = "http://10.0.2.2/gooloo/signup.php?firstName=" + firstName + "&lastName=" + lastName + "&email=" + email + "&mobile=" + "" + "&password=" + "";
+        String url = "http://ivriah.000webhostapp.com/gooloo/gooloo/signup.php?firstName=" + firstName + "&lastName=" + lastName + "&email=" + email + "&mobile=" + "" + "&password=" + "";
 
         // Request a json response from the provided URL.
         JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.GET, url, null,
