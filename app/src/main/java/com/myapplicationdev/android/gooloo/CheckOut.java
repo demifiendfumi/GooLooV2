@@ -72,8 +72,13 @@ public class CheckOut extends AppCompatActivity {
             return true;
         }else if (id == R.id.orderSelection) {
             Intent i = new Intent(getBaseContext(), OrderPage.class);
+            i.putExtra("user", user);
             startActivity(i);
             Log.d("view order", "Order selected");
+            return true;
+        }else if(id == R.id.logout){
+            Intent i = new Intent(this, MainActivity.class);
+            startActivity(i);
             return true;
         }
 

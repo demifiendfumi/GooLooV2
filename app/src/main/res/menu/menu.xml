@@ -17,4 +17,9 @@
         android:orderInCategory="103"
         android:title="View Order"/>
 
+    <item
+        android:id="@+id/logout"
+        android:orderInCategory="104"
+        android:title="Log Out"/>
+
 </menu>

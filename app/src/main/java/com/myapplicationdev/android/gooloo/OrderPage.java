@@ -12,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -113,7 +114,12 @@ public class OrderPage extends AppCompatActivity {
             startActivity(i);
             return true;
         }else if (id == R.id.orderSelection) {
+            Toast.makeText(this, "This is the Order Page", Toast.LENGTH_SHORT);
             Log.d("view order", "Order selected");
+            return true;
+        }else if(id == R.id.logout){
+            Intent i = new Intent(this, MainActivity.class);
+            startActivity(i);
             return true;
         }
 

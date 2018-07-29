@@ -63,7 +63,7 @@ public class ActiveFragment extends Fragment {
         RequestQueue queue = Volley.newRequestQueue(getActivity());
         //http://10.0.2.2/gooloo/
         //http://ivriah.000webhostapp.com/gooloo/gooloo/
-        String url = "http://ivriah.000webhostapp.com/gooloo/gooloo/getActiveOrder.php?customer_id=" + user[0];
+        String url = "http://10.0.2.2/gooloo/getActiveOrder.php?customer_id=" + user[0];
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override

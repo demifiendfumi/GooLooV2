@@ -52,7 +52,8 @@
         <activity android:name=".CheckOut" />
         <activity android:name=".ViewProfile" />
         <activity android:name=".EditProfile" />
-        <activity android:name=".OrderPage"></activity>
+        <activity android:name=".OrderPage"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>
