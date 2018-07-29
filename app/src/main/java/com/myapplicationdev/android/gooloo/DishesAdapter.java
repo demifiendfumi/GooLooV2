@@ -47,6 +47,7 @@ public class DishesAdapter extends RecyclerView.Adapter<DishesAdapter.ViewHolder
     private int dishID; //for addShoppingCartDetails.php
     private String orderRef;
     private int order_id;
+    private String image_name;
 
     public DishesAdapter(List<DishesItem> listDish, Context context, String[]userData, int mID, String pCode) {
         this.listDish = listDish;
@@ -160,6 +161,8 @@ public class DishesAdapter extends RecyclerView.Adapter<DishesAdapter.ViewHolder
             btnAdd = (Button)itemView.findViewById(R.id. btnAdd);
             linearLayout = (LinearLayout) itemView.findViewById(R.id. linearLayout);
             Log.d("userData", Arrays.toString(user));
+            //http://10.0.2.2/gooloo/
+            //http://ivriah.000webhostapp.com/gooloo/gooloo/
 
             btnAdd.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -288,6 +291,7 @@ public class DishesAdapter extends RecyclerView.Adapter<DishesAdapter.ViewHolder
                                                                                                                                             new Response.Listener<String>() {
                                                                                                                                                 @Override
                                                                                                                                                 public void onResponse(String response) {
+                                                                                                                                                    Log.d("response", response.toString());
                                                                                                                                                     Toast.makeText(context, response.toString(), Toast.LENGTH_SHORT).show();
                                                                                                                                                 }
                                                                                                                                             }, new Response.ErrorListener() {

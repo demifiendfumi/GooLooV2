@@ -55,6 +55,8 @@ public class ViewCart extends OptionMenu {
 
         HttpRequest request = new HttpRequest
                 ("http://ivriah.000webhostapp.com/gooloo/gooloo/get-cart.php?c_id=" + c_id);
+        //http://10.0.2.2/gooloo/
+        //http://ivriah.000webhostapp.com/gooloo/gooloo/
         Log.d("url", "http://ivriah.000webhostapp.com/gooloo/gooloo/get-cart.php?c_id=" + c_id);
         request.setOnHttpResponseListener(mHttpResponseListener);
         request.setMethod("GET");

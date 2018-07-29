@@ -19,6 +19,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.squareup.picasso.Picasso;
+
 import java.io.File;
 import java.util.Arrays;
 import java.util.List;
@@ -67,6 +69,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
 
         holder.tvName.setText(listOneRes.getResName());
         holder.tvRating.setText(String.valueOf(listOneRes.getResRating()));
+
         if(listOneRes.getResName().equals("Group Breakfast")){
             holder.ivLogo.setImageResource(R.drawable.group_breakfast);
         }else if (listOneRes.getResName().equals("Catering Services")){

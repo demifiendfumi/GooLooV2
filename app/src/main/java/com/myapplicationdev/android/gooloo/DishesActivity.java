@@ -69,6 +69,9 @@ public class DishesActivity extends OptionMenu {
 
         RequestQueue queue = Volley.newRequestQueue(DishesActivity.this);
         String url ="http://ivriah.000webhostapp.com/gooloo/gooloo/get-dishes.php?m_id=" + m_id;
+        //http://10.0.2.2/gooloo/
+        //http://ivriah.000webhostapp.com/gooloo/gooloo/
+
         Log.d("url", url);
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
@@ -149,8 +152,8 @@ public class DishesActivity extends OptionMenu {
             startActivity(i);
             return true;
         }else if (id == R.id.orderSelection) {
-//            Intent i = new Intent(getBaseContext(), ViewCart.class);
-//            startActivity(i);
+            Intent i = new Intent(getBaseContext(), OrderPage.class);
+            startActivity(i);
             Log.d("view order", "Order selected");
             return true;
         }

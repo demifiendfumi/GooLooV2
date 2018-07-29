@@ -42,6 +42,7 @@ public class EditProfile extends AppCompatActivity {
         etfirstName.setText(user[4]);
         etlastName.setText(user[3]);
         etemail.setText(user[1]);
+        etemail.setFocusable(false);
         etmobile.setText(user_detail[2]);
         etaddress.setText(user_detail[0]);
         etcompany.setText(user_detail[1]);
@@ -58,6 +59,8 @@ public class EditProfile extends AppCompatActivity {
             public void onClick(View v) {
                 HttpRequest request = new HttpRequest
                         ("http://ivriah.000webhostapp.com/gooloo/gooloo/updateProfile.php");
+                //http://10.0.2.2/gooloo/
+                //http://ivriah.000webhostapp.com/gooloo/gooloo/
                 request.setOnHttpResponseListener(mHttpResponseListener);
                 request.setMethod("POST");
                 request.addData("id", user[0]);

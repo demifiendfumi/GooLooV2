@@ -73,6 +73,8 @@ public class RestaurantActivity extends OptionMenu {
 
         RequestQueue queue = Volley.newRequestQueue(RestaurantActivity.this);
         String url ="http://ivriah.000webhostapp.com/gooloo/gooloo/get-restaurants.php?postcode=" + postal;
+        //http://10.0.2.2/gooloo/
+        //http://ivriah.000webhostapp.com/gooloo/gooloo/
         Log.d("url", url);
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {

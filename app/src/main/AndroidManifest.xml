@@ -51,7 +51,8 @@
         <activity android:name=".OptionMenu" />
         <activity android:name=".CheckOut" />
         <activity android:name=".ViewProfile" />
-        <activity android:name=".EditProfile"></activity>
+        <activity android:name=".EditProfile" />
+        <activity android:name=".OrderPage"></activity>
     </application>
 
 </manifest>

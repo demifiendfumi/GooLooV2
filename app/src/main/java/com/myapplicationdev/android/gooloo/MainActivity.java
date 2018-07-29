@@ -92,6 +92,8 @@ public class MainActivity extends AppCompatActivity {
                 password = etPass.getText().toString();
                 RequestQueue queue = Volley.newRequestQueue(MainActivity.this);
                 String url ="http://ivriah.000webhostapp.com/gooloo/gooloo/login.php?email=" + email + "&password=" + password;
+                //http://10.0.2.2/gooloo/
+                //http://ivriah.000webhostapp.com/gooloo/gooloo/
 
                 // Request a json response from the provided URL.
                 JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.GET, url,null,
@@ -256,7 +258,7 @@ public class MainActivity extends AppCompatActivity {
 
                 //Login
                 RequestQueue queue = Volley.newRequestQueue(MainActivity.this);
-                String urlLogin = "http://ivriah.000webhostapp.com/gooloo/gooloo/loginFacebook.php?email=" + emailFB;
+                String urlLogin = "http://10.0.2.2/gooloo/loginFacebook.php?email=" + emailFB;
                 // Request a json response from the provided URL.
                 JsonObjectRequest stringRequestLogin = new JsonObjectRequest(Request.Method.GET, urlLogin, null,
                         new Response.Listener<JSONObject>() {
