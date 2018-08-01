@@ -79,6 +79,7 @@ public class HomeActivity extends OptionMenu {
                         Intent j = new Intent(HomeActivity.this, RestaurantActivity.class);
                         j.putExtra("user", user);
                         j.putExtra("postal_code", postal);
+                        j.putExtra("user_detail", user_detail);
                         startActivity(j);
                     }
                 }catch (NumberFormatException e){
@@ -118,11 +119,17 @@ public class HomeActivity extends OptionMenu {
         }else if (id == R.id.cartSelection) {
             Intent i = new Intent(this, ViewCart.class);
             i.putExtra("user", user);
+            if(user_detail!= null && user_detail.length>0){
+                i.putExtra("user_detail", user_detail);
+            }
             startActivity(i);
             return true;
         }else if (id == R.id.orderSelection) {
             Intent i = new Intent(this, OrderPage.class);
             i.putExtra("user", user);
+            if(user_detail!= null && user_detail.length>0){
+                i.putExtra("user_detail", user_detail);
+            }
             startActivity(i);
             Log.d("view order", "Order selected");
             return true;

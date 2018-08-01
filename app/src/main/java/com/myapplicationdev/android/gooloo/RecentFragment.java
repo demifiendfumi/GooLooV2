@@ -65,13 +65,15 @@ public class RecentFragment extends Fragment {
         RequestQueue queue = Volley.newRequestQueue(getActivity());
         //http://10.0.2.2/gooloo/
         //http://ivriah.000webhostapp.com/gooloo/gooloo/
-        String url = "http://10.0.2.2/gooloo/geRecentOrder.php?customer_id=" + user[0];
+        String url = "http://ivriah.000webhostapp.com/gooloo/gooloo/getRecentOrder.php?customer_id=" + user[0];
+        Log.d("url", url);
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         try {
                             JSONArray jsonArr = new JSONArray(response);
+                            Log.d("response", response.toString());
                             for(int i = 0; i < jsonArr.length(); i++){
                                 JSONObject jsonObj = jsonArr.getJSONObject(i);
                                 String aOId = jsonObj.getString("id");
@@ -81,7 +83,10 @@ public class RecentFragment extends Fragment {
                                 String amount = jsonObj.getString("amount");
                                 recent_order = new String[]{aOId, order_ref, delivery_date, delivery_time, amount};
 
-                                al.add(recent_order.toString());
+                                al.add("Order Ref: " + recent_order[1] + "\n"
+                                        + "Delivery Date: " + recent_order[2] + "\n"
+                                        + "Delivery Time: " + recent_order[3] + "\n"
+                                        + "Amount: $" + recent_order[4]);
 
                                 aa = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, al);
                                 lv_recent.setAdapter(aa);
@@ -101,7 +106,7 @@ public class RecentFragment extends Fragment {
                 toast.show();
             }
         });
-
+        queue.add(stringRequest);
         return rootView;
     }
 

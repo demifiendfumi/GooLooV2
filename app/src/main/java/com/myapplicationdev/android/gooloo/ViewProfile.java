@@ -131,11 +131,19 @@ public class ViewProfile extends AppCompatActivity {
             Log.d("profile", "Profile Selected");
             return true;
         }else if (id == R.id.cartSelection) {
-            Toast.makeText(this, "You are at the Cart Page", Toast.LENGTH_SHORT).show();
+            Intent i = new Intent(ViewProfile.this, ViewCart.class);
+            i.putExtra("user", user);
+            if(user_detail!= null && user_detail.length>0){
+                i.putExtra("user_detail", user_detail);
+            }
+            startActivity(i);
             return true;
         }else if (id == R.id.orderSelection) {
             Intent i = new Intent(this, OrderPage.class);
             i.putExtra("user", user);
+            if(user_detail!= null && user_detail.length>0){
+                i.putExtra("user_detail", user_detail);
+            }
             startActivity(i);
             Log.d("view order", "Order selected");
             return true;

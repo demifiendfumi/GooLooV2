@@ -43,9 +43,11 @@ public class EditProfile extends AppCompatActivity {
         etlastName.setText(user[3]);
         etemail.setText(user[1]);
         etemail.setFocusable(false);
-        etmobile.setText(user_detail[2]);
-        etaddress.setText(user_detail[0]);
-        etcompany.setText(user_detail[1]);
+        if(user_detail!= null && user_detail.length>0){
+            etmobile.setText(user_detail[2]);
+            etaddress.setText(user_detail[0]);
+            etcompany.setText(user_detail[1]);
+        }
 
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override

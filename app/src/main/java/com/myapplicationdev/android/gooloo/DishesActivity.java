@@ -39,6 +39,7 @@ public class DishesActivity extends OptionMenu {
     int m_id = 0;
     String [] data;
     String postal;
+    String [] user_detail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +55,7 @@ public class DishesActivity extends OptionMenu {
         data = intent.getStringArrayExtra("userData");
         m_id = intent.getIntExtra("id", 0);
         postal = intent.getStringExtra("postal");
+        user_detail = intent.getStringArrayExtra("user_detail");
         tvResult.setText(intent.getStringExtra("res_name"));
 
         listDishes = new ArrayList<>();
@@ -99,7 +101,7 @@ public class DishesActivity extends OptionMenu {
                                 listDishes.add(dish);
                             }
                             //tvResult.setText(postal);
-                            ra = new DishesAdapter(listDishes, getApplicationContext(), data, m_id, postal);
+                            ra = new DishesAdapter(listDishes, getApplicationContext(), data, m_id, postal, user_detail);
                             recyclerView.setAdapter(ra);
 
                         } catch (JSONException e) {
@@ -138,22 +140,34 @@ public class DishesActivity extends OptionMenu {
         if (id == R.id.homeSelection) {
             Intent i = new Intent(this, HomeActivity.class);
             i.putExtra("user", data);
+            if(user_detail!= null && user_detail.length>0){
+                i.putExtra("user_detail", user_detail);
+            }
             startActivity(i);
             return true;
         }else if (id == R.id.profileSelection) {
             Intent i = new Intent(this, ViewProfile.class);
             i.putExtra("user", data);
+            if(user_detail!= null && user_detail.length>0){
+                i.putExtra("user_detail", user_detail);
+            }
             startActivity(i);
             Log.d("profile", "Profile Selected");
             return true;
         }else if (id == R.id.cartSelection) {
             Intent i = new Intent(this, ViewCart.class);
             i.putExtra("user", data);
+            if(user_detail!= null && user_detail.length>0){
+                i.putExtra("user_detail", user_detail);
+            }
             startActivity(i);
             return true;
         }else if (id == R.id.orderSelection) {
             Intent i = new Intent(getBaseContext(), OrderPage.class);
             i.putExtra("user", data);
+            if(user_detail!= null && user_detail.length>0){
+                i.putExtra("user_detail", user_detail);
+            }
             startActivity(i);
             Log.d("view order", "Order selected");
             return true;

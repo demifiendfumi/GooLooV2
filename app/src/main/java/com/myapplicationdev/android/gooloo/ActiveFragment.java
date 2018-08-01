@@ -63,7 +63,8 @@ public class ActiveFragment extends Fragment {
         RequestQueue queue = Volley.newRequestQueue(getActivity());
         //http://10.0.2.2/gooloo/
         //http://ivriah.000webhostapp.com/gooloo/gooloo/
-        String url = "http://10.0.2.2/gooloo/getActiveOrder.php?customer_id=" + user[0];
+        String url = "http://ivriah.000webhostapp.com/gooloo/gooloo/getActiveOrder.php?customer_id=" + user[0];
+        Log.d("url", url);
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
@@ -79,7 +80,11 @@ public class ActiveFragment extends Fragment {
                                 String amount = jsonObj.getString("amount");
                                 active_order =  new String[]{aOId, order_ref, delivery_date, delivery_time, amount};
 
-                                al.add(active_order.toString());
+                                al.add("Order Ref: " + active_order[1] + "\n"
+                                        + "Delivery Date: " + active_order[2] + "\n"
+                                        + "Delivery Time: " + active_order[3] + "\n"
+                                        + "Amount: $" + active_order[4]);
+                                Log.d("active_order", active_order.toString());
 
                                 aa = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, al);
                                 lv_active.setAdapter(aa);
@@ -99,6 +104,7 @@ public class ActiveFragment extends Fragment {
                 toast.show();
             }
         });
+        queue.add(stringRequest);
 
         return rootView;
     }

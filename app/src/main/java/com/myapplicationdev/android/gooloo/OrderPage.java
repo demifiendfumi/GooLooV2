@@ -23,6 +23,7 @@ public class OrderPage extends AppCompatActivity {
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private String user[];
+    private String user_detail[];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +32,7 @@ public class OrderPage extends AppCompatActivity {
 
         Intent i = getIntent();
         user = i.getStringArrayExtra("user");
+        user_detail = i.getStringArrayExtra("user_detail");
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -99,18 +101,27 @@ public class OrderPage extends AppCompatActivity {
         if (id == R.id.homeSelection) {
             Intent i = new Intent(this, HomeActivity.class);
             i.putExtra("user", user);
+            if(user_detail!= null && user_detail.length>0){
+                i.putExtra("user_detail", user_detail);
+            }
             startActivity(i);
 
             return true;
         }else if (id == R.id.profileSelection) {
             Intent i = new Intent(getBaseContext(), ViewProfile.class);
             i.putExtra("user", user);
+            if(user_detail!= null && user_detail.length>0){
+                i.putExtra("user_detail", user_detail);
+            }
             startActivity(i);
             Log.d("profile", "Profile Selected");
             return true;
         }else if (id == R.id.cartSelection) {
             Intent i = new Intent(this, ViewCart.class);
             i.putExtra("user", user);
+            if(user_detail!= null && user_detail.length>0){
+                i.putExtra("user_detail", user_detail);
+            }
             startActivity(i);
             return true;
         }else if (id == R.id.orderSelection) {

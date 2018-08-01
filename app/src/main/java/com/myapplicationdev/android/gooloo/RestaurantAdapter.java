@@ -7,6 +7,7 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.Image;
+import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -22,6 +23,7 @@ import android.widget.Toast;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
+import java.io.InputStream;
 import java.util.Arrays;
 import java.util.List;
 
@@ -31,12 +33,14 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
     private AdapterView.OnItemClickListener listener;
     private String [] user;
     private String pCode;
+    private String[] user_detail;
 
-    public RestaurantAdapter(List<RestaurantItem> listRes, Context context, String[]userData, String postCode) {
+    public RestaurantAdapter(List<RestaurantItem> listRes, Context context, String[]userData, String postCode, String[]userDetail) {
         this.listRes = listRes;
         this.context = context;
         user = userData;
         pCode = postCode;
+        user_detail = userDetail;
     }
 
     public void setClickListener(AdapterView.OnItemClickListener listener){
@@ -69,7 +73,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
 
         holder.tvName.setText(listOneRes.getResName());
         holder.tvRating.setText(String.valueOf(listOneRes.getResRating()));
-
+        //new DownloadImageTask(holder.ivLogo).execute(listOneRes.getImageName());
         if(listOneRes.getResName().equals("Group Breakfast")){
             holder.ivLogo.setImageResource(R.drawable.group_breakfast);
         }else if (listOneRes.getResName().equals("Catering Services")){
@@ -89,6 +93,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
                 i.putExtra("res_name", listOneRes.getResName());
                 i.putExtra("userData", user);
                 i.putExtra("postal", pCode);
+                i.putExtra("user_detail", user_detail);
                 Log.d("user_data", Arrays.toString(user));
                 Log.d("Res id", String.valueOf(listOneRes.getId()));
                 Log.d("postal", pCode);
@@ -119,6 +124,31 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
             tvName = (TextView)itemView.findViewById(R.id. textViewName);
             tvRating = (TextView)itemView.findViewById(R.id. textViewRating);
             linearLayout = (LinearLayout)itemView.findViewById(R.id. linearLayout);
+        }
+    }
+
+    private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
+        ImageView bmImage;
+
+        public DownloadImageTask(ImageView bmImage) {
+            this.bmImage = bmImage;
+        }
+
+        protected Bitmap doInBackground(String... urls) {
+            String urldisplay = urls[0];
+            Bitmap mIcon11 = null;
+            try {
+                InputStream in = new java.net.URL(urldisplay).openStream();
+                mIcon11 = BitmapFactory.decodeStream(in);
+            } catch (Exception e) {
+                Log.e("Error", e.getMessage());
+                e.printStackTrace();
+            }
+            return mIcon11;
+        }
+
+        protected void onPostExecute(Bitmap result) {
+            bmImage.setImageBitmap(result);
         }
     }
 }

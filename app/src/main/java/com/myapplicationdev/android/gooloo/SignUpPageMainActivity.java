@@ -69,6 +69,8 @@ public class SignUpPageMainActivity extends AppCompatActivity {
                 if(confirmPassword.equals(password)) {
                     RequestQueue queue = Volley.newRequestQueue(SignUpPageMainActivity.this);
                     String url ="http://ivriah.000webhostapp.com/gooloo/gooloo/signup.php?firstName="+firstName+"&lastName="+lastName+"&email=" + email +"&mobile="+mobile+"&password=" + password;
+                    //http://10.0.2.2/gooloo/signup.php
+                    //http://ivriah.000webhostapp.com/gooloo/gooloo/signup.php
                     StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                             new Response.Listener<String>() {
                                 @Override
