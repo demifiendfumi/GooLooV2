@@ -56,6 +56,9 @@ public class DishesActivity extends OptionMenu {
         m_id = intent.getIntExtra("id", 0);
         postal = intent.getStringExtra("postal");
         user_detail = intent.getStringArrayExtra("user_detail");
+        for(int i = 0; i < user_detail.length; i++){
+            Log.d("user_detail", user_detail[i]);
+        }
         tvResult.setText(intent.getStringExtra("res_name"));
 
         listDishes = new ArrayList<>();

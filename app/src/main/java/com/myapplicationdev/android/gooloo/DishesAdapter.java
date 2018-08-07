@@ -4,6 +4,9 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
@@ -32,6 +35,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -49,7 +53,7 @@ public class DishesAdapter extends RecyclerView.Adapter<DishesAdapter.ViewHolder
     private String orderRef;
     private int order_id;
     private String image_name;
-    private String company;
+    private String company = "";
 
     public DishesAdapter(List<DishesItem> listDish, Context context, String[]userData, int mID, String pCode, String[]userDetail) {
         this.listDish = listDish;
@@ -74,12 +78,9 @@ public class DishesAdapter extends RecyclerView.Adapter<DishesAdapter.ViewHolder
         holder.tvName.setText(listOneDish.getDishName());
         holder.tvCNName.setText(String.valueOf(listOneDish.getDishCNName()));
         holder.tvPrice.setText("$" + listOneDish.getPrice());
-        if(listOneDish.getDishImage().equals("Group Breakfast")){
-            holder.ivImage.setImageResource(R.drawable.group_breakfast);
-        }else if (listOneDish.getDishImage().equals("Catering Services")){
-            holder.ivImage.setImageResource(R.drawable.catering_service);
-        }else if (listOneDish.getDishImage().equals("Gooloo Selected @ Jurong West")){
-            holder.ivImage.setImageResource(R.drawable.gooloo_selected);
+        if(listOneDish.getDishImage().equals("")){
+            String photo_url = "http://ivriah.000webhostapp.com/gooloo/photo/" + listOneDish.getDishImage();
+            new DownloadImageTask(holder.ivImage).execute(photo_url);
         }else{
             holder.ivImage.setImageResource(R.drawable.logo);
         }
@@ -412,4 +413,28 @@ public class DishesAdapter extends RecyclerView.Adapter<DishesAdapter.ViewHolder
         }
     }
 
+    private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
+        ImageView bmImage;
+
+        public DownloadImageTask(ImageView bmImage) {
+            this.bmImage = bmImage;
+        }
+
+        protected Bitmap doInBackground(String... urls) {
+            String urldisplay = urls[0];
+            Bitmap mIcon11 = null;
+            try {
+                InputStream in = new java.net.URL(urldisplay).openStream();
+                mIcon11 = BitmapFactory.decodeStream(in);
+            } catch (Exception e) {
+                Log.e("Error", e.getMessage());
+                e.printStackTrace();
+            }
+            return mIcon11;
+        }
+
+        protected void onPostExecute(Bitmap result) {
+            bmImage.setImageBitmap(result);
+        }
+    }
 }

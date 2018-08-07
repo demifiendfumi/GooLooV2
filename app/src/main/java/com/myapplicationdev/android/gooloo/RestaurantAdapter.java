@@ -73,13 +73,9 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
 
         holder.tvName.setText(listOneRes.getResName());
         holder.tvRating.setText(String.valueOf(listOneRes.getResRating()));
-        //new DownloadImageTask(holder.ivLogo).execute(listOneRes.getImageName());
-        if(listOneRes.getResName().equals("Group Breakfast")){
-            holder.ivLogo.setImageResource(R.drawable.group_breakfast);
-        }else if (listOneRes.getResName().equals("Catering Services")){
-            holder.ivLogo.setImageResource(R.drawable.catering_service);
-        }else if (listOneRes.getResName().equals("Gooloo Selected @ Jurong West")){
-            holder.ivLogo.setImageResource(R.drawable.gooloo_selected);
+        if(listOneRes.getImageName().equals("")){
+            String photo_url = "http://ivriah.000webhostapp.com/gooloo/photo/" + listOneRes.getImageName();
+            new DownloadImageTask(holder.ivLogo).execute(photo_url);
         }else{
             holder.ivLogo.setImageResource(R.drawable.logo);
         }
