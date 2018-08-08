@@ -30,6 +30,7 @@ public class ViewCart extends OptionMenu {
     ArrayList<Cart> carts = new ArrayList<Cart>();
     double total;
     String user[];
+    String user_detail[];
     int c_id;
 
     @Override
@@ -47,6 +48,7 @@ public class ViewCart extends OptionMenu {
 
         Intent intent = getIntent();
         user = intent.getStringArrayExtra("user");
+        user_detail = intent.getStringArrayExtra("user_detail");
         c_id = Integer.parseInt(user[0]);
 
         aa = new CartAdapter(ViewCart.this, R.layout.cart_row_item, carts);
@@ -122,6 +124,7 @@ public class ViewCart extends OptionMenu {
                         Intent i = new Intent(ViewCart.this, CheckOut.class);
                         i.putExtra("msg", msg);
                         i.putExtra("user", user);
+                        i.putExtra("user_detail", user_detail);
                         startActivity(i);
                     }
                     catch(Exception e){
@@ -146,11 +149,17 @@ public class ViewCart extends OptionMenu {
         if (id == R.id.homeSelection) {
             Intent i = new Intent(this, HomeActivity.class);
             i.putExtra("user", user);
+            if(user_detail!= null && user_detail.length>0){
+                i.putExtra("user_detail", user_detail);
+            }
             startActivity(i);
             return true;
         }else if (id == R.id.profileSelection) {
             Intent i = new Intent(this, ViewProfile.class);
             i.putExtra("user", user);
+            if(user_detail!= null && user_detail.length>0){
+                i.putExtra("user_detail", user_detail);
+            }
             startActivity(i);
             Log.d("profile", "Profile Selected");
             return true;
@@ -160,6 +169,9 @@ public class ViewCart extends OptionMenu {
         }else if (id == R.id.orderSelection) {
             Intent i = new Intent(this, OrderPage.class);
             i.putExtra("user", user);
+            if(user_detail!= null && user_detail.length>0){
+                i.putExtra("user_detail", user_detail);
+            }
             startActivity(i);
             Log.d("view order", "Order selected");
             return true;

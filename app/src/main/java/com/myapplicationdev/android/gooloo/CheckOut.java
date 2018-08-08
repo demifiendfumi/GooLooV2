@@ -15,6 +15,7 @@ public class CheckOut extends AppCompatActivity {
     TextView txtMsg;
     Button btnHome;
     String user[];
+    String user_detail[];
     String msg;
 
     @Override
@@ -26,6 +27,7 @@ public class CheckOut extends AppCompatActivity {
 
         Intent i = getIntent();
         user = i.getStringArrayExtra("user");
+        user_detail = i.getStringArrayExtra("user_detail");
         msg = i.getStringExtra("msg");
         txtMsg.setText(msg);
 
@@ -34,6 +36,9 @@ public class CheckOut extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(CheckOut.this, HomeActivity.class);
                 intent.putExtra("user", user);
+                if(user_detail!= null && user_detail.length>0){
+                    intent.putExtra("user_detail", user_detail);
+                }
                 startActivity(intent);
                 finish();
             }
@@ -56,23 +61,35 @@ public class CheckOut extends AppCompatActivity {
         if (id == R.id.homeSelection) {
             Intent i = new Intent(this, HomeActivity.class);
             i.putExtra("user", user);
+            if(user_detail!= null && user_detail.length>0){
+                i.putExtra("user_detail", user_detail);
+            }
             startActivity(i);
 
             return true;
         }else if (id == R.id.profileSelection) {
             Intent i = new Intent(getBaseContext(), ViewProfile.class);
             i.putExtra("user", user);
+            if(user_detail!= null && user_detail.length>0){
+                i.putExtra("user_detail", user_detail);
+            }
             startActivity(i);
             Log.d("profile", "Profile Selected");
             return true;
         }else if (id == R.id.cartSelection) {
             Intent i = new Intent(this, ViewCart.class);
             i.putExtra("user", user);
+            if(user_detail!= null && user_detail.length>0){
+                i.putExtra("user_detail", user_detail);
+            }
             startActivity(i);
             return true;
         }else if (id == R.id.orderSelection) {
             Intent i = new Intent(getBaseContext(), OrderPage.class);
             i.putExtra("user", user);
+            if(user_detail!= null && user_detail.length>0){
+                i.putExtra("user_detail", user_detail);
+            }
             startActivity(i);
             Log.d("view order", "Order selected");
             return true;

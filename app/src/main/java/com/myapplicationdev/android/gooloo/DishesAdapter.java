@@ -306,31 +306,31 @@ public class DishesAdapter extends RecyclerView.Adapter<DishesAdapter.ViewHolder
                                                                                                                                     JSONArray jsonArray1 = null;
                                                                                                                                     try {
                                                                                                                                         jsonArray1 = new JSONArray(response);
-                                                                                                                                        int length = (jsonArray1.length())-1;
-                                                                                                                                        Log.d("lenght", String.valueOf(length));
-                                                                                                                                        JSONObject jsonObject1 = jsonArray1.getJSONObject(length);
-                                                                                                                                        String orderID = jsonObject1.getString("id");
-                                                                                                                                        RequestQueue queueAddOrderDetail = Volley.newRequestQueue(contextI);
-                                                                                                                                        String getMethod = "order_id=" + orderID + "&item_id=" + dishID + "&m_id=" + mid + "&item_name=" + tvName.getText() + "&item_cn_name=" + tvCNName.getText() + "&amount=" + amount + "&count=" + count[0] + "&price=" + price.substring(1) + "&create_time=" + booking_time + "&update_time=" + booking_time + "&pick_count=" + count[0];
-                                                                                                                                        Log.d("add url", getMethod);
-                                                                                                                                        String url = "http://ivriah.000webhostapp.com/gooloo/gooloo/addOrderDetail.php?" + getMethod;
-                                                                                                                                        Log.d("url", url);
-                                                                                                                                        StringRequest stringRequestAOD = new StringRequest(Request.Method.GET, url,
-                                                                                                                                                new Response.Listener<String>() {
-                                                                                                                                                    @Override
-                                                                                                                                                    public void onResponse(String response) {
-                                                                                                                                                        Log.d("response", response.toString());
-                                                                                                                                                        Toast.makeText(context, response.toString(), Toast.LENGTH_SHORT).show();
-                                                                                                                                                    }
-                                                                                                                                                }, new Response.ErrorListener() {
-                                                                                                                                            @Override
-                                                                                                                                            public void onErrorResponse(VolleyError error) {
-                                                                                                                                                Log.d("item", error.toString()+"");
-                                                                                                                                                Toast toast = Toast.makeText(context, error.toString(), Toast.LENGTH_LONG);
-                                                                                                                                                toast.show();
-                                                                                                                                            }
-                                                                                                                                        });
-                                                                                                                                        queueAddOrderDetail.add(stringRequestAOD);
+                                                                                                                                        for(int i = 0; i<jsonArray1.length(); i++){
+                                                                                                                                            JSONObject jsonObject1 = jsonArray1.getJSONObject(i);
+                                                                                                                                            String orderID = jsonObject1.getString("id");
+                                                                                                                                            RequestQueue queueAddOrderDetail = Volley.newRequestQueue(contextI);
+                                                                                                                                            String getMethod = "order_id=" + orderID + "&item_id=" + dishID + "&m_id=" + mid + "&item_name=" + tvName.getText() + "&item_cn_name=" + tvCNName.getText() + "&amount=" + amount + "&count=" + count[0] + "&price=" + price.substring(1) + "&create_time=" + booking_time + "&update_time=" + booking_time + "&pick_count=" + count[0];
+                                                                                                                                            Log.d("add url", getMethod);
+                                                                                                                                            String url = "http://ivriah.000webhostapp.com/gooloo/gooloo/addOrderDetail.php?" + getMethod;
+                                                                                                                                            Log.d("url", url);
+                                                                                                                                            StringRequest stringRequestAOD = new StringRequest(Request.Method.GET, url,
+                                                                                                                                                    new Response.Listener<String>() {
+                                                                                                                                                        @Override
+                                                                                                                                                        public void onResponse(String response) {
+                                                                                                                                                            Log.d("response", response.toString());
+                                                                                                                                                            Toast.makeText(context, response.toString(), Toast.LENGTH_SHORT).show();
+                                                                                                                                                        }
+                                                                                                                                                    }, new Response.ErrorListener() {
+                                                                                                                                                @Override
+                                                                                                                                                public void onErrorResponse(VolleyError error) {
+                                                                                                                                                    Log.d("item", error.toString()+"");
+                                                                                                                                                    Toast toast = Toast.makeText(context, error.toString(), Toast.LENGTH_LONG);
+                                                                                                                                                    toast.show();
+                                                                                                                                                }
+                                                                                                                                            });
+                                                                                                                                            queueAddOrderDetail.add(stringRequestAOD);
+                                                                                                                                        }
                                                                                                                                     } catch (JSONException e) {
                                                                                                                                         e.printStackTrace();
                                                                                                                                     }
