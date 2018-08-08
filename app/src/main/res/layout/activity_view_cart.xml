@@ -75,6 +75,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="right"
-        android:gravity="right"
-        android:text="Place Order" />
+        android:background="#ef5350"
+        android:text="Place Order"
+        android:textColor="@android:color/white" />
 </LinearLayout>

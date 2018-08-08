@@ -25,7 +25,9 @@
             android:id="@+id/buttonMinus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="#ef5350"
             android:text="-"
+            android:textColor="@android:color/white"
             android:textSize="24sp"
             tools:ignore="HardcodedText" />
 
@@ -43,7 +45,9 @@
             android:id="@+id/buttonAdd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="#ef5350"
             android:text="+"
+            android:textColor="@android:color/white"
             android:textSize="24sp" />
     </LinearLayout>
 </LinearLayout>

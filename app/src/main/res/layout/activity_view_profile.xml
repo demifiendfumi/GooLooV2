@@ -157,13 +157,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Back" />
+            android:background="#ef5350"
+            android:text="Back"
+            android:textColor="@android:color/white" />
 
         <Button
             android:id="@+id/btnEdit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Edit" />
+            android:background="#ef5350"
+            android:text="Edit"
+            android:textColor="@android:color/white" />
     </LinearLayout>
 </LinearLayout>

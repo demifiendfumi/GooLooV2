@@ -19,9 +19,9 @@
 
             <ImageView
                 android:id="@+id/ivImage"
-                android:layout_width="wrap_content"
+                android:layout_width="149dp"
                 android:layout_height="149dp"
-                app:srcCompat="@drawable/catering_service" />
+                app:srcCompat="@drawable/logo" />
 
             <TextView
                 android:id="@+id/textViewName"
