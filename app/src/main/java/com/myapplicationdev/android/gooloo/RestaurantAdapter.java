@@ -73,12 +73,15 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
 
         holder.tvName.setText(listOneRes.getResName());
         holder.tvRating.setText(String.valueOf(listOneRes.getResRating()));
-        if(listOneRes.getImageName().equals("")){
-            String photo_url = "http://ivriah.000webhostapp.com/gooloo/photo/" + listOneRes.getImageName();
-            new DownloadImageTask(holder.ivLogo).execute(photo_url);
-        }else{
-            holder.ivLogo.setImageResource(R.drawable.logo);
-        }
+        String photo_url = "http://ivriah.000webhostapp.com/gooloo/photos/" + listOneRes.getImageName();
+        Log.d("photo_url", photo_url);
+//        if(listOneRes.getImageName().equals("")){
+//            String photo_url = "http://ivriah.000webhostapp.com/gooloo/photo/" + listOneRes.getImageName();
+//            new DownloadImageTask(holder.ivLogo).execute(photo_url);
+//        }else{
+//            holder.ivLogo.setImageResource(R.drawable.logo);
+//        }
+        Picasso.with(context).load(photo_url).error(R.drawable.logo).into(holder.ivLogo);
 
         holder.linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -120,31 +123,6 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
             tvName = (TextView)itemView.findViewById(R.id. textViewName);
             tvRating = (TextView)itemView.findViewById(R.id. textViewRating);
             linearLayout = (LinearLayout)itemView.findViewById(R.id. linearLayout);
-        }
-    }
-
-    private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
-        ImageView bmImage;
-
-        public DownloadImageTask(ImageView bmImage) {
-            this.bmImage = bmImage;
-        }
-
-        protected Bitmap doInBackground(String... urls) {
-            String urldisplay = urls[0];
-            Bitmap mIcon11 = null;
-            try {
-                InputStream in = new java.net.URL(urldisplay).openStream();
-                mIcon11 = BitmapFactory.decodeStream(in);
-            } catch (Exception e) {
-                Log.e("Error", e.getMessage());
-                e.printStackTrace();
-            }
-            return mIcon11;
-        }
-
-        protected void onPostExecute(Bitmap result) {
-            bmImage.setImageBitmap(result);
         }
     }
 }

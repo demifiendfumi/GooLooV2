@@ -30,6 +30,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -78,12 +79,15 @@ public class DishesAdapter extends RecyclerView.Adapter<DishesAdapter.ViewHolder
         holder.tvName.setText(listOneDish.getDishName());
         holder.tvCNName.setText(String.valueOf(listOneDish.getDishCNName()));
         holder.tvPrice.setText("$" + listOneDish.getPrice());
-        if(listOneDish.getDishImage().equals("")){
-            String photo_url = "http://ivriah.000webhostapp.com/gooloo/photo/" + listOneDish.getDishImage();
-            new DownloadImageTask(holder.ivImage).execute(photo_url);
-        }else{
-            holder.ivImage.setImageResource(R.drawable.logo);
-        }
+//        if(listOneDish.getDishImage().equals("")){
+//            String photo_url = "http://ivriah.000webhostapp.com/gooloo/photo/" + listOneDish.getDishImage();
+//            new DownloadImageTask(holder.ivImage).execute(photo_url);
+//        }else{
+//            holder.ivImage.setImageResource(R.drawable.logo);
+//        }
+        String photo_url = "http://ivriah.000webhostapp.com/gooloo/photos/" + listOneDish.getDishImage();
+        Log.d("dish url", photo_url);
+        Picasso.with(context).load(photo_url).error(R.drawable.logo).into(holder.ivImage);
 
 //        holder.btnAdd.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -293,7 +297,7 @@ public class DishesAdapter extends RecyclerView.Adapter<DishesAdapter.ViewHolder
                                                                                                                 @Override
                                                                                                                 public void onResponse(String response) {
                                                                                                                     RequestQueue queueGetOrderId = Volley.newRequestQueue(contextI);
-                                                                                                                    String url = "http://ivriah.000webhostapp.com/gooloo/gooloo/getOrderByOrderId.php?order_ref=" + orderRef;
+                                                                                                                    String url = "http://ivriah.000webhostapp.com/gooloo/gooloo/getOrderByOrderId.php?" + of;
                                                                                                                     Log.d("url", url);
                                                                                                                     StringRequest stringRequestGOI = new StringRequest(Request.Method.GET, url,
                                                                                                                             new Response.Listener<String>() {
@@ -302,10 +306,13 @@ public class DishesAdapter extends RecyclerView.Adapter<DishesAdapter.ViewHolder
                                                                                                                                     JSONArray jsonArray1 = null;
                                                                                                                                     try {
                                                                                                                                         jsonArray1 = new JSONArray(response);
-                                                                                                                                        JSONObject jsonObject1 = jsonArray1.getJSONObject(0);
+                                                                                                                                        int length = jsonArray1.length();
+                                                                                                                                        Log.d("lenght", String.valueOf(length));
+                                                                                                                                        JSONObject jsonObject1 = jsonArray1.getJSONObject(length);
                                                                                                                                         String orderID = jsonObject1.getString("id");
                                                                                                                                         RequestQueue queueAddOrderDetail = Volley.newRequestQueue(contextI);
                                                                                                                                         String getMethod = "order_id=" + orderID + "&item_id=" + dishID + "&m_id=" + mid + "&item_name=" + tvName.getText() + "&item_cn_name=" + tvCNName.getText() + "&amount=" + amount + "&count=" + count[0] + "&price=" + price.substring(1) + "&create_time=" + booking_time + "&update_time=" + booking_time + "&pick_count=" + count[0];
+                                                                                                                                        Log.d("add url", getMethod);
                                                                                                                                         String url = "http://ivriah.000webhostapp.com/gooloo/gooloo/addOrderDetail.php?" + getMethod;
                                                                                                                                         Log.d("url", url);
                                                                                                                                         StringRequest stringRequestAOD = new StringRequest(Request.Method.GET, url,
