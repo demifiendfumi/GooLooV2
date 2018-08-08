@@ -306,7 +306,7 @@ public class DishesAdapter extends RecyclerView.Adapter<DishesAdapter.ViewHolder
                                                                                                                                     JSONArray jsonArray1 = null;
                                                                                                                                     try {
                                                                                                                                         jsonArray1 = new JSONArray(response);
-                                                                                                                                        int length = jsonArray1.length();
+                                                                                                                                        int length = (jsonArray1.length())-1;
                                                                                                                                         Log.d("lenght", String.valueOf(length));
                                                                                                                                         JSONObject jsonObject1 = jsonArray1.getJSONObject(length);
                                                                                                                                         String orderID = jsonObject1.getString("id");
