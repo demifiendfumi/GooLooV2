@@ -5,12 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ViewProfile">
+    tools:context=".ViewProfile"
+    android:padding="10dp">
 
     <ImageView
         android:id="@+id/ivProfile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:layout_weight="1"
         app:srcCompat="@drawable/com_facebook_profile_picture_blank_square" />
 
@@ -154,16 +156,21 @@
 
         <Button
             android:id="@+id/btnBack"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="#ef5350"
             android:text="Back"
             android:textColor="@android:color/white" />
 
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3" />
+
         <Button
             android:id="@+id/btnEdit"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="#ef5350"

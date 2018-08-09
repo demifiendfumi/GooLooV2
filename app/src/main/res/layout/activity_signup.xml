@@ -4,14 +4,6 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/tvSignupFB"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="Signup with Facebook"
-        android:textSize="16sp" />
-
     <Space
         android:layout_width="match_parent"
         android:layout_height="30dp" />
@@ -19,7 +11,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
 
         <TextView
             android:id="@+id/tvFirstName"
@@ -27,7 +21,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="First Name"
-            android:textSize="18sp" />
+            android:textSize="18sp"/>
 
         <EditText
             android:id="@+id/etFirstname"
@@ -41,11 +35,13 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
 
         <TextView
             android:id="@+id/tvLastName"
-            android:layout_width="78dp"
+            android:layout_width="76dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Last Name"
@@ -64,7 +60,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
 
         <TextView
             android:id="@+id/tvEmail"
@@ -86,7 +84,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
 
         <TextView
             android:id="@+id/tvMobileNo"
@@ -108,7 +108,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
 
         <TextView
             android:id="@+id/tvPassword"
@@ -130,12 +132,14 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
 
         <TextView
             android:id="@+id/tvConfirmPass"
             android:layout_width="76dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="Confirm Password"
             android:textSize="18sp" />
@@ -152,7 +156,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
 
         <TextView
             android:id="@+id/tvAddress"
@@ -173,7 +179,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
 
         <TextView
             android:id="@+id/tvCompany"
@@ -191,6 +199,14 @@
             android:ems="10"
             android:inputType="textPersonName" />
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvSignupFB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Signup with Facebook"
+        android:textSize="16sp" />
 
     <Space
         android:layout_width="match_parent"

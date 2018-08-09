@@ -189,7 +189,6 @@ public class DishesAdapter extends RecyclerView.Adapter<DishesAdapter.ViewHolder
                     final int[] count = {0};
                     Log.d("count", String.valueOf(count[0]));
                     TextView tvDN =(TextView) viewDialog.findViewById(R.id.tvDishName);
-                    TextView tvDNCN = viewDialog.findViewById(R.id.textViewCNName);
                     final TextView tvCount =(TextView) viewDialog.findViewById(R.id.textViewCount);
                     Button btnMinus =(Button)viewDialog.findViewById(R.id. buttonMinus);
                     Button btnAdd =(Button)viewDialog.findViewById(R.id. buttonAdd);
@@ -197,8 +196,7 @@ public class DishesAdapter extends RecyclerView.Adapter<DishesAdapter.ViewHolder
                     myBuilder.setView(viewDialog);
                     myBuilder.setTitle("Number of orders");
                     myBuilder.setCancelable(false);
-                    tvDN.setText("Dish Name: " + tvName.getText());
-                    tvDNCN.setText(tvCNName.getText());
+                    tvDN.setText("Dish Name: " + tvName.getText() + "\nChinese Name: " + tvCNName.getText());
                     Log.d("display alert", "displaying");
                     btnAdd.setOnClickListener(new View.OnClickListener() {
                         @Override

@@ -72,7 +72,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
         //holder.tvImage.setText(listOneRes.getImageName());
 
         holder.tvName.setText(listOneRes.getResName());
-        holder.tvRating.setText(String.valueOf(listOneRes.getResRating()));
+        holder.tvRating.setText("Rating:" + String.valueOf(listOneRes.getResRating()));
         String photo_url = "http://ivriah.000webhostapp.com/gooloo/photos/" + listOneRes.getImageName();
         Log.d("photo_url", photo_url);
 //        if(listOneRes.getImageName().equals("")){
@@ -94,6 +94,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
                 i.putExtra("postal", pCode);
                 i.putExtra("user_detail", user_detail);
                 Log.d("user_data", Arrays.toString(user));
+                Log.d("user_detail", Arrays.toString(user_detail));
                 Log.d("Res id", String.valueOf(listOneRes.getId()));
                 Log.d("postal", pCode);
                 context.startActivity(i);

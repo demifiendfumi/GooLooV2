@@ -17,6 +17,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Arrays;
+
 public class HomeActivity extends OptionMenu {
 
     TextView tvFirstName, tvLastName;
@@ -58,6 +60,7 @@ public class HomeActivity extends OptionMenu {
         Intent intent = getIntent();
         user = intent.getStringArrayExtra("user");
         user_detail = intent.getStringArrayExtra("user_detail");
+        Log.d("user_detail", Arrays.toString(user_detail));
 
         //Extract data from user
         firstName = user[4];

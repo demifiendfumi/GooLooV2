@@ -5,7 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".DishesActivity">
+    tools:context=".DishesActivity"
+    android:paddingRight="10dp"
+    android:paddingLeft="10dp">
 
     <TextView
         android:id="@+id/textViewResSelect"
@@ -19,6 +21,8 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvLVDish"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+        android:layout_height="wrap_content"
+        >
+    </android.support.v7.widget.RecyclerView>
 
 </LinearLayout>

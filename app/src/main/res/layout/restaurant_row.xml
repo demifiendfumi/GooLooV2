@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="10dp">
 
     <android.support.v7.widget.CardView
         android:id="@+id/cv"
@@ -12,33 +13,42 @@
         android:layout_margin="@dimen/cardview_compat_inset_shadow">
 
         <LinearLayout
-            android:id="@+id/linearLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
 
             <ImageView
                 android:id="@+id/ivImage"
-                android:layout_width="149dp"
-                android:layout_height="149dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
                 app:srcCompat="@drawable/logo" />
 
-            <TextView
-                android:id="@+id/textViewName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="TextView"
-                android:textColor="@android:color/black"
-                android:textSize="16sp" />
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/textViewRating"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Rating: "
-                android:textColor="@android:color/black"
-                android:textSize="16sp" />
+                <TextView
+                    android:id="@+id/textViewName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="TextView"
+                    android:textColor="@android:color/black"
+                    android:textSize="18sp" />
 
+                <TextView
+                    android:id="@+id/textViewRating"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Rating: "
+                    android:textColor="@android:color/black"
+                    android:textSize="18sp" />
+
+            </LinearLayout>
         </LinearLayout>
 
     </android.support.v7.widget.CardView>

@@ -59,7 +59,7 @@ public class DishesActivity extends OptionMenu {
         for(int i = 0; i < user_detail.length; i++){
             Log.d("user_detail", user_detail[i]);
         }
-        tvResult.setText(intent.getStringExtra("res_name"));
+        tvResult.setText("You have selected " + intent.getStringExtra("res_name"));
 
         listDishes = new ArrayList<>();
         Log.d("run load","running");

@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
     String user_detail[];
 
     //ArrayList<String> user = new ArrayList<String>();
-    //String [] user = {};
+    String user[];
 
     private TextView info;
     private LoginButton loginButtonFB;
@@ -112,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
                                     Log.d("item", response.getString("last_name"));
                                     firstName = response.getString("first_name");
                                     Log.d("item", response.getString("first_name"));
-                                    String [] user = {id,objEmail, objPass, lastName, firstName};
+                                    user = new String[]{id, objEmail, objPass, lastName, firstName};
                                     //test array
                                     for(int x =0; x < user.length; x++){
                                         Log.d("item", user[x]);
@@ -123,12 +123,6 @@ public class MainActivity extends AppCompatActivity {
                                         request.setOnHttpResponseListener(mHttpResponseListener);
                                         request.setMethod("GET");
                                         request.execute();
-
-                                        Intent j = new Intent(MainActivity.this, HomeActivity.class);
-                                        j.putExtra("user", user);
-                                        j.putExtra("user_detail", user_detail);
-                                        Log.d("user", user.length+"");
-                                        startActivity(j);
                                     }else{
                                         Toast toast = Toast.makeText(MainActivity.this, "email/password is incorrect", Toast.LENGTH_LONG);
                                         toast.show();
@@ -359,6 +353,11 @@ public class MainActivity extends AppCompatActivity {
                         for(int i = 0; i< user_detail.length; i++){
                             Log.d("user_detail", user_detail[i]);
                         }
+                        Intent j = new Intent(MainActivity.this, HomeActivity.class);
+                        j.putExtra("user", user);
+                        j.putExtra("user_detail", user_detail);
+                        Log.d("user", user.length+"");
+                        startActivity(j);
 
                     }
                     catch(Exception e){

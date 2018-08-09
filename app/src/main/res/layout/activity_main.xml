@@ -6,7 +6,9 @@
     android:layout_height="match_parent"
     android:gravity="top|center"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:paddingRight="10dp"
+    android:paddingLeft="10dp">
 
     <Space
         android:layout_width="1dp"
