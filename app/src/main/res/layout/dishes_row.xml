@@ -27,7 +27,8 @@
                     android:id="@+id/ivImageDish"
                     android:layout_width="178dp"
                     android:layout_height="102dp"
-                    app:srcCompat="@drawable/gooloo_selected" />
+                    android:layout_gravity="right"
+                    app:srcCompat="@drawable/logo" />
 
                 <TextView
                     android:id="@+id/textViewDishName"

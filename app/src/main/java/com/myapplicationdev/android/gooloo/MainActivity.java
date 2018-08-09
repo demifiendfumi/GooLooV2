@@ -62,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
     String objPass ="";
     String lastName = "";
     String firstName = "";
+    String user_detail[];
 
     //ArrayList<String> user = new ArrayList<String>();
     //String [] user = {};
@@ -117,8 +118,15 @@ public class MainActivity extends AppCompatActivity {
                                         Log.d("item", user[x]);
                                     }
                                     if(objEmail.equals(email) && objPass.equals(password)){
+                                        HttpRequest request = new HttpRequest
+                                                ("http://ivriah.000webhostapp.com/gooloo/gooloo/viewProfile.php?firstName="+ firstName +"&lastName=" + lastName);
+                                        request.setOnHttpResponseListener(mHttpResponseListener);
+                                        request.setMethod("GET");
+                                        request.execute();
+
                                         Intent j = new Intent(MainActivity.this, HomeActivity.class);
                                         j.putExtra("user", user);
+                                        j.putExtra("user_detail", user_detail);
                                         Log.d("user", user.length+"");
                                         startActivity(j);
                                     }else{
@@ -337,6 +345,29 @@ public class MainActivity extends AppCompatActivity {
         AppEventsLogger.deactivateApp(MainActivity.this);
 
     }
+
+    private HttpRequest.OnHttpResponseListener mHttpResponseListener =
+            new HttpRequest.OnHttpResponseListener() {
+                @Override
+                public void onResponse(String response){
+                    // process response here
+                    Log.i("JSON Results: ", response);
+                    try {
+                        JSONArray jsonArr = new JSONArray(response);
+                        JSONObject jsonObj = jsonArr.getJSONObject(0);
+                        user_detail = new String[]{jsonObj.getString("address"), jsonObj.getString("company_name"), jsonObj.getString("mobile")};
+                        for(int i = 0; i< user_detail.length; i++){
+                            Log.d("user_detail", user_detail[i]);
+                        }
+
+                    }
+                    catch(Exception e){
+                        e.printStackTrace();
+                    }
+
+                }
+            };
+
     private boolean isLoggedIn() {
         return AccessToken.isCurrentAccessTokenActive()
                 && !AccessToken.getCurrentAccessToken().getPermissions().isEmpty();

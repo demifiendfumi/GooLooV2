@@ -25,7 +25,7 @@ import org.json.JSONObject;
 public class SignUpPageMainActivity extends AppCompatActivity {
 
     TextView tvSignupFB, tvFirstName, tvLastName, tvEmail, tvMobile, tvPass,tvCPass;
-    EditText etFirstName, etLastName, etEmail, etMobile, etPassword, etConfirmPassword;
+    EditText etFirstName, etLastName, etEmail, etMobile, etPassword, etConfirmPassword, etAddress, etCompany;
     Button btnConfirm;
 
     @Override
@@ -41,6 +41,8 @@ public class SignUpPageMainActivity extends AppCompatActivity {
         etMobile = (EditText)findViewById(R.id.etMobileNo);
         etPassword = (EditText)findViewById(R.id.etPassword);
         etConfirmPassword = (EditText)findViewById(R.id.etConfirmPassword);
+        etAddress = findViewById(R.id.etAddress);
+        etCompany = findViewById(R.id.etCompany);
 
         btnConfirm = (Button)findViewById(R.id.btnConfirm);
 
@@ -65,10 +67,14 @@ public class SignUpPageMainActivity extends AppCompatActivity {
                 String mobile = etMobile.getText().toString();
                 final String password = etPassword.getText().toString();
                 final String confirmPassword = etConfirmPassword.getText().toString();
-                final String [] signUp = {firstName, lastName, email, mobile, password};
+                Log.e("address", etAddress.getText().toString());
+                String address = etAddress.getText().toString();
+                Log.e("company", etCompany.getText().toString());
+                String company = etCompany.getText().toString();
+                final String [] signUp = {firstName, lastName, email, mobile, password, address,company};
                 if(confirmPassword.equals(password)) {
                     RequestQueue queue = Volley.newRequestQueue(SignUpPageMainActivity.this);
-                    String url ="http://ivriah.000webhostapp.com/gooloo/gooloo/signup.php?firstName="+firstName+"&lastName="+lastName+"&email=" + email +"&mobile="+mobile+"&password=" + password;
+                    String url ="http://ivriah.000webhostapp.com/gooloo/gooloo/signup.php?firstName="+firstName+"&lastName="+lastName+"&email=" + email +"&mobile="+mobile+"&password=" + password + "&company=" + company + "&address=" + address;
                     //http://10.0.2.2/gooloo/signup.php
                     //http://ivriah.000webhostapp.com/gooloo/gooloo/signup.php
                     StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
@@ -84,10 +90,8 @@ public class SignUpPageMainActivity extends AppCompatActivity {
                                         toast.show();
                                         Log.d("toast", response.toString());
                                     }else{
-                                        Intent i = new Intent(SignUpPageMainActivity.this, SendVerifyActivity.class);
-                                        Log.d("intent", signUp.length+"");
-                                        i.putExtra("signUp", signUp);
-                                        startActivity(i);
+                                        Toast.makeText(SignUpPageMainActivity.this, response.toString(), Toast.LENGTH_LONG).show();
+                                        finish();
                                     }
 
                                 }

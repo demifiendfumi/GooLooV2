@@ -189,6 +189,7 @@ public class DishesAdapter extends RecyclerView.Adapter<DishesAdapter.ViewHolder
                     final int[] count = {0};
                     Log.d("count", String.valueOf(count[0]));
                     TextView tvDN =(TextView) viewDialog.findViewById(R.id.tvDishName);
+                    TextView tvDNCN = viewDialog.findViewById(R.id.textViewCNName);
                     final TextView tvCount =(TextView) viewDialog.findViewById(R.id.textViewCount);
                     Button btnMinus =(Button)viewDialog.findViewById(R.id. buttonMinus);
                     Button btnAdd =(Button)viewDialog.findViewById(R.id. buttonAdd);
@@ -196,7 +197,8 @@ public class DishesAdapter extends RecyclerView.Adapter<DishesAdapter.ViewHolder
                     myBuilder.setView(viewDialog);
                     myBuilder.setTitle("Number of orders");
                     myBuilder.setCancelable(false);
-                    tvDN.setText(tvName.getText() + "\n" + tvCNName.getText());
+                    tvDN.setText("Dish Name: " + tvName.getText());
+                    tvDNCN.setText(tvCNName.getText());
                     Log.d("display alert", "displaying");
                     btnAdd.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -258,6 +260,7 @@ public class DishesAdapter extends RecyclerView.Adapter<DishesAdapter.ViewHolder
                                                 sb.append("&firstName=" + user[4]);
                                                 sb.append("&lastName=" + user[3]);
                                                 sb.append("&final=" + String.format("%.2f", Double.parseDouble(price.substring(1))));
+                                                sb.append("&mid=" + mid);
 
                                                 orderRef = "GL"+rpn;
                                                 RequestQueue queue = Volley.newRequestQueue(contextI); //add to orders table
