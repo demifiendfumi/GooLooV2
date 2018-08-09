@@ -75,7 +75,8 @@ public class DishesAdapter extends RecyclerView.Adapter<DishesAdapter.ViewHolder
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
         final DishesItem listOneDish = listDish.get(position);
-        dishID = listOneDish.getDishId();
+        holder.tvID.setText(String.valueOf(listOneDish.getDishId()));
+        Log.d("itemID", String.valueOf(listOneDish.getDishId()));
         holder.tvName.setText(listOneDish.getDishName());
         holder.tvCNName.setText(String.valueOf(listOneDish.getDishCNName()));
         holder.tvPrice.setText("$" + listOneDish.getPrice());
@@ -153,18 +154,19 @@ public class DishesAdapter extends RecyclerView.Adapter<DishesAdapter.ViewHolder
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
-        public TextView tvName, tvCNName, tvPrice;
+        public TextView tvName, tvCNName, tvPrice, tvID;
         public ImageView ivImage;
         public Button btnAdd;
         public LinearLayout linearLayout;
         private Context contextI;
 
-        public ViewHolder(View itemView) {
+        public ViewHolder(final View itemView) {
             super(itemView);
             contextI = itemView.getContext();
             ivImage = (ImageView)itemView.findViewById(R.id. ivImageDish);
             tvName = (TextView)itemView.findViewById(R.id. textViewDishName);
             tvCNName = (TextView)itemView.findViewById(R.id. textViewCNName);
+            tvID = itemView.findViewById(R.id.textViewID);
             tvPrice = (TextView)itemView.findViewById(R.id. textViewPrice);
             btnAdd = (Button)itemView.findViewById(R.id. btnAdd);
             linearLayout = (LinearLayout) itemView.findViewById(R.id. linearLayout);
@@ -291,7 +293,7 @@ public class DishesAdapter extends RecyclerView.Adapter<DishesAdapter.ViewHolder
                                                                                                     Log.d("shoppingCart_id", shpCartId);
 
                                                                                                     RequestQueue queueSCD = Volley.newRequestQueue(contextI); //add to shopping_cart_details table
-                                                                                                    String url ="http://ivriah.000webhostapp.com/gooloo/gooloo/addShoppingCartDetails.php?shopping_cart_id="+ shpCartId +"&items_id="+ dishID +"&amount="+ number +"&create_time="+ booking_time +"&update_time="+ booking_time;
+                                                                                                    String url ="http://ivriah.000webhostapp.com/gooloo/gooloo/addShoppingCartDetails.php?shopping_cart_id="+ shpCartId +"&items_id="+ tvID.getText() +"&amount="+ number +"&create_time="+ booking_time +"&update_time="+ booking_time;
                                                                                                     Log.d("url", url);
                                                                                                     StringRequest stringRequestSCD = new StringRequest(Request.Method.GET, url,
                                                                                                             new Response.Listener<String>() {
@@ -311,7 +313,7 @@ public class DishesAdapter extends RecyclerView.Adapter<DishesAdapter.ViewHolder
                                                                                                                                             JSONObject jsonObject1 = jsonArray1.getJSONObject(i);
                                                                                                                                             String orderID = jsonObject1.getString("id");
                                                                                                                                             RequestQueue queueAddOrderDetail = Volley.newRequestQueue(contextI);
-                                                                                                                                            String getMethod = "order_id=" + orderID + "&item_id=" + dishID + "&m_id=" + mid + "&item_name=" + tvName.getText() + "&item_cn_name=" + tvCNName.getText() + "&amount=" + amount + "&count=" + count[0] + "&price=" + price.substring(1) + "&create_time=" + booking_time + "&update_time=" + booking_time + "&pick_count=" + count[0];
+                                                                                                                                            String getMethod = "order_id=" + orderID + "&item_id=" + tvID.getText() + "&m_id=" + mid + "&item_name=" + tvName.getText() + "&item_cn_name=" + tvCNName.getText() + "&amount=" + amount + "&count=" + count[0] + "&price=" + price.substring(1) + "&create_time=" + booking_time + "&update_time=" + booking_time + "&pick_count=" + count[0];
                                                                                                                                             Log.d("add url", getMethod);
                                                                                                                                             String url = "http://ivriah.000webhostapp.com/gooloo/gooloo/addOrderDetail.php?" + getMethod;
                                                                                                                                             Log.d("url", url);

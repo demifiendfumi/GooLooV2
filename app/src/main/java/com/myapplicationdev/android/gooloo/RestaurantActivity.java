@@ -101,7 +101,7 @@ public class RestaurantActivity extends OptionMenu {
                                 );
                                 listItems.add(item);
                             }
-                            tvResult.setText(postal);
+                            tvResult.setText("Postal code: " + postal);
                             Log.d("arraylist", listItems.size() + "");
                             Log.d("arraylist 1", listItems.get(0).toString());
                             Log.d("listItems", listItems.size()+"");
